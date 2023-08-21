@@ -1,5 +1,6 @@
-package com.example.backend;
+package com.example.backend.Program;
 
+import com.example.backend.Exercise.Exercise;
 import jakarta.persistence.*;
 import net.minidev.json.annotate.JsonIgnore;
 

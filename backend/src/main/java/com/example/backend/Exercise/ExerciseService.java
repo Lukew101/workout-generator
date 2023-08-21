@@ -1,9 +1,9 @@
-package com.example.backend;
+package com.example.backend.Exercise;
 
+import com.example.backend.Exercise.ExerciseAPIResponseDTO;
+import com.example.backend.Exercise.ExerciseResponseDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
-
-import java.util.List;
 
 @Service
 public class ExerciseService {
