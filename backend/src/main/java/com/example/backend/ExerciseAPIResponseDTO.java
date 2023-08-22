@@ -1,4 +1,7 @@
-package com.example.backend.Exercise;
+package com.example.backend;
 
-public record ExerciseAPIResponseDTO(String type, String muscle, String difficulty) {
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public record ExerciseAPIResponseDTO(String name, String type, String muscle, String equipment, String difficulty, String instructions) {
 }
