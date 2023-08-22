@@ -1,0 +1,26 @@
+package com.example.backend;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.net.http.HttpClient;
+import java.util.List;
+
+
+@SpringBootTest
+public class ExerciseServiceTest {
+
+    @Autowired
+    private ExerciseService exerciseService;
+
+    @Test
+    public void testGetExerciseList() {
+        try {
+            List<ExerciseAPIResponseDTO> exerciseList = exerciseService.getExerciseList();
+            System.out.println("Exercise List: " + exerciseList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}

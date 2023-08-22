@@ -7,18 +7,13 @@ import net.minidev.json.annotate.JsonIgnore;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
 public class Program {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+
     private Long id;
 
     private String name;
 
-    @OneToMany(mappedBy = "program", cascade = CascadeType.ALL)
-    @JsonIgnore
     private List<Exercise> exercises = new ArrayList<>();
 
     public Program(String name) {

@@ -2,12 +2,8 @@ package com.example.backend.Exercise;
 
 import jakarta.persistence.*;
 
-@Entity
 public class Exercise {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private Long id;
     private String name;
     private String type;
