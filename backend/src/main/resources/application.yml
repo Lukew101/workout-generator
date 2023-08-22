@@ -1,18 +1,18 @@
-### DB config goes here
-#spring:
-#  output:
-#    ansi:
-#      enabled: always
-#  datasource:
-#    url: jdbc:postgresql://localhost:5432/saltdb
-#    username: salt
-#    password: secret
-#  jpa:
-#    show-sql: true
-#    defer-datasource-initialization: true
-#    hibernate:
-#      ddl-auto: create-drop
-#  sql:
-#    init:
-#      platform: postgresql
-#      mode: always # run initialisation scripts or not
+## DB config goes here
+spring:
+  output:
+    ansi:
+      enabled: always
+  datasource:
+    url: jdbc:postgresql://localhost:5432/saltdb
+    username: salt
+    password: secret
+  jpa:
+    show-sql: true
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: create-drop
+  sql:
+    init:
+      platform: postgresql
+      mode: always # run initialisation scripts or not

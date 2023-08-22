@@ -1,20 +1,24 @@
-package com.example.backend.Exercise;
+package com.example.backend;
 
 import jakarta.persistence.*;
-
+@Entity
 public class Exercise {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id", nullable = false)
     private Long id;
     private String name;
     private String type;
     private String muscle;
+    private String equipment;
     private String difficulty;
     private String instructions;
 
-    public Exercise(String name, String type, String muscle, String difficulty, String instructions) {
+    public Exercise(String name, String type, String muscle, String equipment, String difficulty, String instructions) {
         this.name = name;
         this.type = type;
         this.muscle = muscle;
+        this.equipment = equipment;
         this.difficulty = difficulty;
         this.instructions = instructions;
     }
@@ -44,6 +48,14 @@ public class Exercise {
 
     public void setMuscle(String muscle) {
         this.muscle = muscle;
+    }
+
+    public String getEquipment() {
+        return equipment;
+    }
+
+    public void setEquipment(String equipment) {
+        this.equipment = equipment;
     }
 
     public String getDifficulty() {
