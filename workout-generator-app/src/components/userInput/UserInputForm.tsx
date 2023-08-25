@@ -1,8 +1,31 @@
-const UserInput = () => {
+import { FormEvent } from "react";
+
+interface AddEntityFormProps {
+    setExercises: React.Dispatch<React.SetStateAction<Exercise[]>>;
+}
+
+const UserInputForm = ({ setExercises }: AddEntityFormProps) => {
+
+    const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+
+        const formData = new FormData();
+
+        const duration = (event.target as HTMLFormElement).duration.value;
+        const trainingType = (event.target as HTMLFormElement).type.value;
+        const muscle = (event.target as HTMLFormElement).muscle.value;
+        const difficulty = (event.target as HTMLFormElement).difficulty.value;
+
+        formData.append("duration", duration);
+        formData.append("type", trainingType);
+        formData.append("muscle", muscle);
+        formData.append("difficulty", difficulty);
+    }
+    
   return (
     <div>
         <h2>Generate Exercises</h2>
-        <form id="programFormInput">
+        <form onSubmit={handleFormSubmit} id="programFormInput">
             <label>Session Duration</label>
             <select name="duration" defaultValue="" id="trainingDuration">
                 <option value="15">Not started</option>
@@ -51,4 +74,4 @@ const UserInput = () => {
   )
 }
 
-export default UserInput
+export default UserInputForm
