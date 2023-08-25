@@ -1,40 +1,51 @@
-import { useState } from "react";
-
-interface ExerciseSearchProps {
-    onSearch: (searchValues: { sessionLength: string, trainingType: string, difficulty: string }) => void;
-  }
-
-const UserInput = ({ onSearch }: ExerciseSearchProps) => {
-    const [searchValues, setSearchValues] = useState({
-        sessionLength: '',
-        trainingType: '',
-        difficulty: '',
-    });
-
-    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = event.target;
-        setSearchValues((prevValues) => ({
-          ...prevValues,
-          [name]: value,
-        }));
-      };
-    
-      const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        onSearch(searchValues);
-      };
-
+const UserInput = () => {
   return (
     <div>
-        <h2>Exercise Search</h2>
-        <form onSubmit={handleFormSubmit}>
-            <label>Session Length</label>
-            <input type="text" name="sessionLength" value={searchValues.sessionLength} onChange={handleInputChange}></input>
+        <h2>Generate Exercises</h2>
+        <form id="programFormInput">
+            <label>Session Duration</label>
+            <select name="duration" defaultValue="" id="trainingDuration">
+                <option value="15">Not started</option>
+                <option value="30">In progress</option>
+                <option value="45">Completed</option>
+                <option value="60">Not started</option>
+                <option value="75">In progress</option>
+                <option value="75+">Completed</option>
+            </select>
             <label>Training type</label>
-            <input type="text" name="trainingType" value={searchValues.trainingType} onChange={handleInputChange}></input>
+            <select name="type" defaultValue="" id="trainingType">
+                <option value="cardio">Cardio</option>
+                <option value="strength">Strength</option>
+                <option value="powerLifting">Power Lifting</option>
+                <option value="strongman">Strongman</option>
+                <option value="plyometrics">Plyometrics</option>
+                <option value="stretching">Stretching</option>
+            </select>
+            <label>Muscle</label>
+            <select name="muscle" defaultValue="" id="trainingMuscle">
+                <option value="abdominals">abdominals</option>
+                <option value="abductors">Abductors</option>
+                <option value="biceps">Biceps</option>
+                <option value="calves">Calves</option>
+                <option value="Chest">Chest</option>
+                <option value="forearms">Forearms</option>
+                <option value="glutes">Glutes</option>
+                <option value="hamstrings">Hamstrings</option>
+                <option value="lats">Lats</option>
+                <option value="lowerBack">Lower Back</option>
+                <option value="middleBack">Middle Back</option>
+                <option value="neck">Neck</option>
+                <option value="quadriceps">Quadriceps</option>
+                <option value="traps">Traps</option>
+                <option value="triceps">Triceps</option>
+            </select>
             <label>Difficulty</label>
-            <input type="text" name="difficulty" value={searchValues.difficulty} onChange={handleInputChange}></input>
-            <button type="submit"></button>
+            <select name="difficulty" defaultValue="" id="trainingType">
+                <option value="beginner">Beginner (0-3 months)</option>
+                <option value="intermediate">Intermediate (4-12 months)</option>
+                <option value="expert">Expert (12+ months)</option>
+            </select>
+            <button type="submit" className="form__button">Generate</button>
         </form>
     </div>
   )
