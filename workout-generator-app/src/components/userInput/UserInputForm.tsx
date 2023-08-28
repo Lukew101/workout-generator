@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.css';
 import { FormEvent } from "react";
 
 interface AddEntityFormProps {

@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import 'bootstrap/dist/css/bootstrap.css';
+import { useState } from 'react'
 import './App.css'
 import UserInputForm from './components/userInput/UserInputForm'
 import ExcerciseBoard from './components/exerciseBoard/ExcerciseBoard'
