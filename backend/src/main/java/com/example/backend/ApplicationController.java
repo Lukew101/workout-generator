@@ -19,15 +19,15 @@ public class ApplicationController {
         this.exerciseService = exerciseService;
     }
 
-    @GetMapping
+    @PostMapping("/exercises")
     ResponseEntity<List<ExerciseAPIResponseDTO>> getExerciseList(
-//            @RequestParam("duration") int duration,
-//            @RequestParam("type") String type,
-//            @RequestParam("muscle") String muscle,
-//            @RequestParam("difficulty") String difficulty
+            @RequestParam("duration") int duration,
+            @RequestParam("type") String type,
+            @RequestParam("muscle") String muscle,
+            @RequestParam("difficulty") String difficulty
     ) throws IOException, InterruptedException {
-//        ExerciseResponseDTO exerciseResponseDTO = new ExerciseResponseDTO(duration, type, muscle, difficulty);
-        List<ExerciseAPIResponseDTO> exerciseList = exerciseService.getExerciseList();
+        ExerciseResponseDTO exerciseResponseDTO = new ExerciseResponseDTO(duration, type, muscle, difficulty);
+        List<ExerciseAPIResponseDTO> exerciseList = exerciseService.getExerciseList(exerciseResponseDTO);
 
         return ResponseEntity.ok(exerciseList);
     }
