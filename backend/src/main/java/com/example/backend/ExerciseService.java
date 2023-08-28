@@ -20,14 +20,16 @@ public class ExerciseService {
     private String apiKey;
 
     public List<ExerciseAPIResponseDTO> getExerciseList(ExerciseResponseDTO responseDTO) throws IOException, InterruptedException {
-
-        Random r = new Random();
-        int min = 0;
-        int max = 20;
-        int randomOffset = r.nextInt(max - min + 1) + min;
+        String apiUri = "https://exercises-by-api-ninjas.p.rapidapi.com/v1/exercises?type=" + responseDTO.type()+ "&muscle=" + responseDTO.muscle() + "&difficulty=" + responseDTO.difficulty();
+        if (responseDTO.muscle() == null) {
+            apiUri = "https://exercises-by-api-ninjas.p.rapidapi.com/v1/exercises?type=" + responseDTO.type() + "&difficulty=" + responseDTO.difficulty();
+        }
+        if (responseDTO.difficulty() == null) {
+            apiUri = "https://exercises-by-api-ninjas.p.rapidapi.com/v1/exercises?type=" + responseDTO.type()+ "&muscle=" + responseDTO.muscle();
+        }
 
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://exercises-by-api-ninjas.p.rapidapi.com/v1/exercises?type=" + responseDTO.type()+ "&muscle=" + responseDTO.muscle() + "&difficulty=" + responseDTO.difficulty() + "&offset=" + randomOffset))
+                .uri(URI.create(apiUri))
                 .header("X-RapidAPI-Key", apiKey)
                 .header("X-RapidAPI-Host", "exercises-by-api-ninjas.p.rapidapi.com")
                 .method("GET", HttpRequest.BodyPublishers.noBody())
