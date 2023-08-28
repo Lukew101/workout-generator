@@ -52,12 +52,14 @@ const UserInputForm = ({ setExercises }: AddEntityFormProps) => {
         </select>
         <label>Training type</label>
         <select name="type" defaultValue="" id="trainingType">
-          <option value="cardio">Cardio</option>
           <option value="strength">Strength</option>
+          {/*
+          <option value="cardio">Cardio</option>
           <option value="powerLifting">Power Lifting</option>
           <option value="strongman">Strongman</option>
           <option value="plyometrics">Plyometrics</option>
           <option value="stretching">Stretching</option>
+          */}
         </select>
         <label>Muscle</label>
         <select name="muscle" defaultValue="" id="trainingMuscle">

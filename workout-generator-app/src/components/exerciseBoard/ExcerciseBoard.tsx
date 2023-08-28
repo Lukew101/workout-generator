@@ -1,3 +1,4 @@
+import ExerciseCard from "../exerciseCard/ExerciseCard";
 
 type AddEntityFormProps = {
   exercises: Exercise[];
@@ -5,7 +6,14 @@ type AddEntityFormProps = {
 
 const ExcerciseBoard = ({ exercises }: AddEntityFormProps) => {
   return (
-    <div>ExcerciseBoard</div>
+    <div>
+      <h2>Exercises</h2>
+      {exercises.map((exercise) => (
+        <ExerciseCard
+        key={exercise.name}
+        exercise={exercise} />
+      ))}
+    </div>
   )
 }
 

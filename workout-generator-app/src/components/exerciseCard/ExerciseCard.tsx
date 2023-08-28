@@ -1,15 +1,15 @@
-interface Exercise {
-  name: string;
-  difficulty: string;
-  description: string;
-}
+type ExerciseProps = {
+  exercise: Exercise;
+};
 
-const ExerciseCard = ({name, description, difficulty}: Exercise) => {
+const ExerciseCard = ({ exercise }: ExerciseProps) => {
   return (
     <div>
-        <h2>{name}</h2>
-        <p>{description}</p>
-        <p>{difficulty}</p>
+        <h2>{exercise.name}</h2>
+        <p>{exercise.instructions}</p>
+        <p>{exercise.equipment}</p>
+        <p>{exercise.difficulty}</p>
+        <p>{exercise.muscle}</p>
     </div>
   )
 }
