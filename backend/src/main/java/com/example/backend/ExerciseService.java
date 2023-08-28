@@ -18,10 +18,10 @@ public class ExerciseService {
     @Value("${API_KEY}")
     private String apiKey;
 
-    public List<ExerciseAPIResponseDTO> getExerciseList() throws IOException, InterruptedException {
+    public List<ExerciseAPIResponseDTO> getExerciseList(ExerciseResponseDTO responseDTO) throws IOException, InterruptedException {
 
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://exercises-by-api-ninjas.p.rapidapi.com/v1/exercises?type=strength&muscle=biceps&difficulty=beginner"))
+                .uri(URI.create("https://exercises-by-api-ninjas.p.rapidapi.com/v1/exercises?type=" + responseDTO.type()+ "&muscle=" + responseDTO.muscle() + "&difficulty=" + responseDTO.difficulty()))
                 .header("X-RapidAPI-Key", apiKey)
                 .header("X-RapidAPI-Host", "exercises-by-api-ninjas.p.rapidapi.com")
                 .method("GET", HttpRequest.BodyPublishers.noBody())
