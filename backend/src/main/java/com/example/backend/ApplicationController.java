@@ -28,7 +28,6 @@ public class ApplicationController {
     ) throws IOException, InterruptedException {
         ExerciseResponseDTO exerciseResponseDTO = new ExerciseResponseDTO(duration, type, muscle, difficulty);
         List<ExerciseAPIResponseDTO> exerciseList = exerciseService.getExerciseList(exerciseResponseDTO);
-
         return ResponseEntity.ok(exerciseList);
     }
 }
