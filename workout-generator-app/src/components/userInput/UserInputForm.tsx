@@ -19,11 +19,11 @@ const UserInputForm = ({ setExercises }: AddEntityFormProps) => {
     formData.append("type", trainingType);
 
     const muscleField = formElement.muscle;
-    const muscle = muscleField ? muscleField.value : null;
+    const muscle = muscleField ? muscleField.value : "";
     formData.append("muscle", muscle);
 
     const difficultyField = formElement.difficulty;
-    const difficulty = difficultyField ? difficultyField.value : null;
+    const difficulty = difficultyField ? difficultyField.value : "";
     formData.append("difficulty", difficulty);
 
     console.log(formData);
