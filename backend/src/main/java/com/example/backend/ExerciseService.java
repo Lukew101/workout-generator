@@ -10,6 +10,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -20,12 +21,15 @@ public class ExerciseService {
     private String apiKey;
 
     public List<ExerciseAPIResponseDTO> getExerciseList(ExerciseResponseDTO responseDTO) throws IOException, InterruptedException {
-        String apiUri = "https://exercises-by-api-ninjas.p.rapidapi.com/v1/exercises?type=" + responseDTO.type()+ "&muscle=" + responseDTO.muscle() + "&difficulty=" + responseDTO.difficulty();
+        List<ExerciseAPIResponseDTO> selectedExercises = new ArrayList<>();
+        Random random = new Random();
+        String apiUri = "https://exercises-by-api-ninjas.p.rapidapi.com/v1/exercises?type=" + responseDTO.type() + "&muscle=" + responseDTO.muscle() + "&difficulty=" + responseDTO.difficulty();
+
         if (responseDTO.muscle() == null) {
             apiUri = "https://exercises-by-api-ninjas.p.rapidapi.com/v1/exercises?type=" + responseDTO.type() + "&difficulty=" + responseDTO.difficulty();
         }
         if (responseDTO.difficulty() == null) {
-            apiUri = "https://exercises-by-api-ninjas.p.rapidapi.com/v1/exercises?type=" + responseDTO.type()+ "&muscle=" + responseDTO.muscle();
+            apiUri = "https://exercises-by-api-ninjas.p.rapidapi.com/v1/exercises?type=" + responseDTO.type() + "&muscle=" + responseDTO.muscle();
         }
 
         HttpRequest request = HttpRequest.newBuilder()
@@ -35,13 +39,30 @@ public class ExerciseService {
                 .method("GET", HttpRequest.BodyPublishers.noBody())
                 .build();
 
-            HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-            String responseBody = response.body();
+        HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+        String responseBody = response.body();
 
-            ObjectMapper objectMapper = new ObjectMapper();
+        ObjectMapper objectMapper = new ObjectMapper();
 
-            return objectMapper.readValue(
-                    responseBody,
-                    new TypeReference<List<ExerciseAPIResponseDTO>>() {});
+        List<ExerciseAPIResponseDTO> responseExerciseList = objectMapper.readValue(
+                responseBody,
+                new TypeReference<List<ExerciseAPIResponseDTO>>() {
+                });
+
+        int numExercises = switch (responseDTO.duration()) {
+            case 15 -> 2;
+            case 30 -> 4;
+            case 45 -> 5;
+            case 60 -> 6;
+            default -> 0;
+        };
+
+        for (int i = 0; i < numExercises; i++) {
+            int randomExerciseIndex = random.nextInt(responseExerciseList.size());
+            ExerciseAPIResponseDTO selectedExercise = responseExerciseList.get(randomExerciseIndex);
+            selectedExercises.add(selectedExercise);
+            responseExerciseList.remove(randomExerciseIndex);
+        }
+        return selectedExercises;
     }
 }
