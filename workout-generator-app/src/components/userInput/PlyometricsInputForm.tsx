@@ -43,18 +43,18 @@ const PlyometricsInputForm = ({ setExercises }: AddEntityFormProps) => {
         <h2>Plyometrics</h2>
         <form onSubmit={handleFormSubmit} id="plyometrics">
             <label>Session Duration</label>
-            <select name="duration" defaultValue="" id="trainingDuration">
+            <select className='form-select' name="duration" defaultValue="" id="trainingDuration">
                 <option value="15">&lt; 15 minutes</option>
                 <option value="30">30 minutes</option>
                 <option value="45">45 minutes</option>
                 <option value="60">60 minutes</option>
             </select>
             <label>Training type</label>
-            <select name="type" defaultValue="" id="trainingType">
+            <select className='form-select' name="type" defaultValue="" id="trainingType" disabled>
                 <option value="plyometrics">Plyometrics</option>
             </select>
             <label>Difficulty</label>
-            <select name="difficulty" defaultValue="" id="trainingType">
+            <select className='form-select' name="difficulty" defaultValue="" id="trainingType">
                 <option value="beginner">Beginner (0-3 months)</option>
                 <option value="intermediate">Intermediate (4-12 months)</option>
                 <option value="expert">Expert (12+ months)</option>

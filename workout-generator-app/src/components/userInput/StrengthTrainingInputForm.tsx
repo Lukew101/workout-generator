@@ -43,18 +43,18 @@ const StrengthTrainingInputForm = ({ setExercises }: AddEntityFormProps) => {
         <h2>Strength Training</h2>
         <form onSubmit={handleFormSubmit} id="muscle1FormInput">
             <label>Session Duration</label>
-            <select name="duration" defaultValue="" id="trainingDuration">
+            <select className='form-select' name="duration" defaultValue="" id="trainingDuration">
                 <option value="15">&lt; 15 minutes</option>
                 <option value="30">30 minutes</option>
                 <option value="45">45 minutes</option>
                 <option value="60">60 minutes</option>
             </select>
             <label>Training type</label>
-            <select name="type" defaultValue="" id="trainingType">
+            <select className='form-select' name="type" defaultValue="" id="trainingType" disabled>
                 <option value="strength">Strength</option>
             </select>
             <label>Muscle</label>
-            <select name="muscle" defaultValue="" id="trainingMuscle">
+            <select className='form-select' name="muscle" defaultValue="" id="trainingMuscle">
                 <option value="abdominals">Abdominals</option>
                 <option value="abductors">Abductors</option>
                 <option value="biceps">Biceps</option>
@@ -72,7 +72,7 @@ const StrengthTrainingInputForm = ({ setExercises }: AddEntityFormProps) => {
                 <option value="triceps">Triceps</option>
             </select>
             <label>Difficulty</label>
-            <select name="difficulty" defaultValue="" id="trainingType">
+            <select className='form-select' name="difficulty" defaultValue="" id="trainingType">
                 <option value="beginner">Beginner (0-3 months)</option>
                 <option value="intermediate">Intermediate (4-12 months)</option>
                 <option value="expert">Expert (12+ months)</option>

@@ -43,18 +43,18 @@ const StretchingInputForm = ({ setExercises }: AddEntityFormProps) => {
         <h2>Stretching</h2>
         <form onSubmit={handleFormSubmit} id="stretching">
             <label>Session Duration</label>
-            <select name="duration" defaultValue="" id="trainingDuration">
+            <select className='form-select' name="duration" defaultValue="" id="trainingDuration">
                 <option value="15">&lt; 15 minutes</option>
                 <option value="30">30 minutes</option>
                 <option value="45">45 minutes</option>
                 <option value="60">60 minutes</option>
             </select>
             <label>Training type</label>
-            <select name="type" defaultValue="" id="trainingType">
-            <option value="stretching">Stretching</option>
+            <select className='form-select' name="type" defaultValue="" id="trainingType" disabled>
+                <option value="stretching">Stretching</option>
             </select>
             <label>Muscle</label>
-            <select name="muscle" defaultValue="" id="trainingMuscle">
+            <select className='form-select' name="muscle" defaultValue="" id="trainingMuscle">
                 <option value="abdominals">Abdominals</option>
                 <option value="abductors">Abductors</option>
                 <option value="biceps">Biceps</option>
