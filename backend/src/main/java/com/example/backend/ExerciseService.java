@@ -57,6 +57,10 @@ public class ExerciseService {
             default -> 0;
         };
 
+        if (responseExerciseList.size() < numExercises) {
+            numExercises = responseExerciseList.size();
+        }
+
         for (int i = 0; i < numExercises; i++) {
             int randomExerciseIndex = random.nextInt(responseExerciseList.size());
             ExerciseAPIResponseDTO selectedExercise = responseExerciseList.get(randomExerciseIndex);
