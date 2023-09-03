@@ -1,86 +1,107 @@
-import 'bootstrap/dist/css/bootstrap.css';
+import "bootstrap/dist/css/bootstrap.css";
 import { FormEvent } from "react";
-import { postForm } from '../../httpMethods';
+import { postForm } from "../../httpMethods";
 
 interface AddEntityFormProps {
-  setExercises: React.Dispatch<React.SetStateAction<Exercise[]>>,
+  setExercises: (exercises: Exercise[]) => void;
 }
 
 const StrengthTrainingInputForm = ({ setExercises }: AddEntityFormProps) => {
-    function buildFormData(formElement: HTMLFormElement): FormData {
-        const formData = new FormData();
-    
-        const duration = formElement.duration.value;
-        formData.append("duration", duration);
-    
-        const trainingType = formElement.type.value;
-        formData.append("type", trainingType);
-    
-        const muscleField = formElement.muscle;
-        const muscle = muscleField ? muscleField.value : "";
-        formData.append("muscle", muscle);
-    
-        const difficultyField = formElement.difficulty;
-        const difficulty = difficultyField ? difficultyField.value : "";
-        formData.append("difficulty", difficulty);
-    
-        return formData;
-    }
+  function buildFormData(formElement: HTMLFormElement): FormData {
+    const formData = new FormData();
 
-    const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-    
-        const formElement = event.target as HTMLFormElement;
-        const formData = buildFormData(formElement);
-    
-        console.log(formData);
-    
-        postForm(formData, setExercises);
-    };
+    const duration = formElement.duration.value;
+    formData.append("duration", duration);
+
+    const trainingType = formElement.type.value;
+    formData.append("type", trainingType);
+
+    const muscleField = formElement.muscle;
+    const muscle = muscleField ? muscleField.value : "";
+    formData.append("muscle", muscle);
+
+    const difficultyField = formElement.difficulty;
+    const difficulty = difficultyField ? difficultyField.value : "";
+    formData.append("difficulty", difficulty);
+
+    return formData;
+  }
+
+  const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const formElement = event.target as HTMLFormElement;
+    const formData = buildFormData(formElement);
+
+    console.log(formData);
+
+    postForm(formData, setExercises);
+  };
 
   return (
     <div>
-        <h2>Strength Training</h2>
-        <form onSubmit={handleFormSubmit} id="muscle1FormInput">
-            <label>Session Duration</label>
-            <select className='form-select' name="duration" defaultValue="" id="trainingDuration">
-                <option value="15">&lt; 15 minutes</option>
-                <option value="30">30 minutes</option>
-                <option value="45">45 minutes</option>
-                <option value="60">60 minutes</option>
-            </select>
-            <label>Training type</label>
-            <select className='form-select' name="type" defaultValue="" id="trainingType" disabled>
-                <option value="strength">Strength</option>
-            </select>
-            <label>Muscle</label>
-            <select className='form-select' name="muscle" defaultValue="" id="trainingMuscle">
-                <option value="abdominals">Abdominals</option>
-                <option value="abductors">Abductors</option>
-                <option value="biceps">Biceps</option>
-                <option value="calves">Calves</option>
-                <option value="Chest">Chest</option>
-                <option value="forearms">Forearms</option>
-                <option value="glutes">Glutes</option>
-                <option value="hamstrings">Hamstrings</option>
-                <option value="lats">Lats</option>
-                <option value="lower_back">Lower Back</option>
-                <option value="middle_back">Middle Back</option>
-                <option value="neck">Neck</option>
-                <option value="quadriceps">Quadriceps</option>
-                <option value="traps">Traps</option>
-                <option value="triceps">Triceps</option>
-            </select>
-            <label>Difficulty</label>
-            <select className='form-select' name="difficulty" defaultValue="" id="trainingType">
-                <option value="beginner">Beginner (0-3 months)</option>
-                <option value="intermediate">Intermediate (4-12 months)</option>
-                <option value="expert">Expert (12+ months)</option>
-            </select>
-            <button type="submit" className="form__button">
-            Generate
-            </button>
-        </form> 
+      <h2>Strength Training</h2>
+      <form onSubmit={handleFormSubmit} id="muscle1FormInput">
+        <label>Session Duration</label>
+        <select
+          className="form-select"
+          name="duration"
+          defaultValue=""
+          id="trainingDuration"
+        >
+          <option value="15">&lt; 15 minutes</option>
+          <option value="30">30 minutes</option>
+          <option value="45">45 minutes</option>
+          <option value="60">60 minutes</option>
+        </select>
+        <label>Training type</label>
+        <select
+          className="form-select"
+          name="type"
+          defaultValue=""
+          id="trainingType"
+          disabled
+        >
+          <option value="strength">Strength</option>
+        </select>
+        <label>Muscle</label>
+        <select
+          className="form-select"
+          name="muscle"
+          defaultValue=""
+          id="trainingMuscle"
+        >
+          <option value="abdominals">Abdominals</option>
+          <option value="abductors">Abductors</option>
+          <option value="biceps">Biceps</option>
+          <option value="calves">Calves</option>
+          <option value="Chest">Chest</option>
+          <option value="forearms">Forearms</option>
+          <option value="glutes">Glutes</option>
+          <option value="hamstrings">Hamstrings</option>
+          <option value="lats">Lats</option>
+          <option value="lower_back">Lower Back</option>
+          <option value="middle_back">Middle Back</option>
+          <option value="neck">Neck</option>
+          <option value="quadriceps">Quadriceps</option>
+          <option value="traps">Traps</option>
+          <option value="triceps">Triceps</option>
+        </select>
+        <label>Difficulty</label>
+        <select
+          className="form-select"
+          name="difficulty"
+          defaultValue=""
+          id="trainingType"
+        >
+          <option value="beginner">Beginner (0-3 months)</option>
+          <option value="intermediate">Intermediate (4-12 months)</option>
+          <option value="expert">Expert (12+ months)</option>
+        </select>
+        <button type="submit" className="form__button">
+          Generate
+        </button>
+      </form>
     </div>
   );
 };
