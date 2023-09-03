@@ -1,37 +1,102 @@
-import 'bootstrap/dist/css/bootstrap.css';
-import { useState } from 'react'
-import './App.css'
-import ExcerciseBoard from './components/exerciseBoard/ExcerciseBoard'
-import StrengthTrainingInputForm from './components/userInput/StrengthTrainingInputForm';
-import CardioInputForm from './components/userInput/CardioTrainingInputForm';
-import PlyometricsInputForm from './components/userInput/PlyometricsInputForm';
-import StretchingInputForm from './components/userInput/StretchingInputForm';
-
+import "bootstrap/dist/css/bootstrap.css";
+import { useState } from "react";
+import "./App.css";
+import ExcerciseBoard from "./components/exerciseBoard/ExcerciseBoard";
+import StrengthTrainingInputForm from "./components/userInput/StrengthTrainingInputForm";
+import CardioInputForm from "./components/userInput/CardioTrainingInputForm";
+import PlyometricsInputForm from "./components/userInput/PlyometricsInputForm";
+import StretchingInputForm from "./components/userInput/StretchingInputForm";
 
 function App() {
-  const [stengthExercisesOne, setStrengthExercisesOne] = useState<Exercise[]>([]);
-  const [stengthExercisesTwo, setStrengthExercisesTwo] = useState<Exercise[]>([]);
-  const [cardioExercises, setCardioExercises] = useState<Exercise[]>([]);
-  const [plyometricExercises, setPlyometricExercises] = useState<Exercise[]>([]);
-  const [stretchingExercises, setStretchingExercises] = useState<Exercise[]>([]);
+  const [selectedExerciseType, setSelectedExerciseType] = useState("");
+  const [exercises, setExercises] = useState<{
+    [key: string]: Exercise[];
+  }>({});
+
+  const handleExerciseTypeChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    setSelectedExerciseType(event.target.value);
+  };
+
+  const handleGenerateExerciseSet = (exercises: Exercise[]) => {
+    setExercises((prevExercises) => ({
+      ...prevExercises,
+      [selectedExerciseType]: [
+        ...(prevExercises[selectedExerciseType] || []),
+        ...exercises,
+      ],
+    }));
+  };
+
+  const renderExerciseFormAndBoard = () => {
+    if (selectedExerciseType) {
+      switch (selectedExerciseType) {
+        case "strength":
+          return (
+            <>
+              <StrengthTrainingInputForm
+                setExercises={handleGenerateExerciseSet}
+              />
+              <ExcerciseBoard
+                exercises={exercises[selectedExerciseType] || []}
+              />
+            </>
+          );
+        case "cardio":
+          return (
+            <>
+              <CardioInputForm setExercises={handleGenerateExerciseSet} />
+              <ExcerciseBoard
+                exercises={exercises[selectedExerciseType] || []}
+              />
+            </>
+          );
+        case "plyometrics":
+          return (
+            <>
+              <PlyometricsInputForm setExercises={handleGenerateExerciseSet} />
+              <ExcerciseBoard
+                exercises={exercises[selectedExerciseType] || []}
+              />
+            </>
+          );
+        case "stretching":
+          return (
+            <>
+              <StretchingInputForm setExercises={handleGenerateExerciseSet} />
+              <ExcerciseBoard
+                exercises={exercises[selectedExerciseType] || []}
+              />
+            </>
+          );
+        default:
+          return null;
+      }
+    }
+    return null;
+  };
 
   return (
     <main>
       <h1>The Workout Generator</h1>
       <h2>How to use?</h2>
-      <p>Fill out the inputs below, click generate to get a list of exercise cards, pick the number of specified cards, perform the exercises and save the program if you like it.</p>
-      <StrengthTrainingInputForm setExercises={setStrengthExercisesOne} />
-      <ExcerciseBoard exercises={stengthExercisesOne} />
-      <StrengthTrainingInputForm setExercises={setStrengthExercisesTwo} />
-      <ExcerciseBoard exercises={stengthExercisesTwo} />
-      <CardioInputForm setExercises={setCardioExercises} />
-      <ExcerciseBoard exercises={cardioExercises} />
-      <PlyometricsInputForm setExercises={setPlyometricExercises} />
-      <ExcerciseBoard exercises={plyometricExercises} />
-      <StretchingInputForm setExercises={setStretchingExercises} />
-      <ExcerciseBoard exercises={stretchingExercises} />
+      <p>
+        Fill out the inputs below, click generate to get a list of exercise
+        cards, pick the number of specified cards, perform the exercises and
+        save the program if you like it.
+      </p>
+      <label>Select Exercise Type:</label>
+      <select value={selectedExerciseType} onChange={handleExerciseTypeChange}>
+        <option value="">Select an exercise type</option>
+        <option value="strength">Strength Training</option>
+        <option value="cardio">Cardio</option>
+        <option value="plyometrics">Plyometrics</option>
+        <option value="stretching">Stretching</option>
+      </select>
+      {renderExerciseFormAndBoard()}
     </main>
-  )
+  );
 }
 
-export default App
+export default App;
