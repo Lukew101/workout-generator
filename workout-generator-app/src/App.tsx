@@ -40,6 +40,7 @@ function App() {
               />
               <ExcerciseBoard
                 exercises={exercises[selectedExerciseType] || []}
+                formTitle="Strength Exercises"
               />
             </>
           );
@@ -49,6 +50,7 @@ function App() {
               <CardioInputForm setExercises={handleGenerateExerciseSet} />
               <ExcerciseBoard
                 exercises={exercises[selectedExerciseType] || []}
+                formTitle="Cardiovascular Exercises"
               />
             </>
           );
@@ -58,6 +60,7 @@ function App() {
               <PlyometricsInputForm setExercises={handleGenerateExerciseSet} />
               <ExcerciseBoard
                 exercises={exercises[selectedExerciseType] || []}
+                formTitle="Plyometric Exercises"
               />
             </>
           );
@@ -67,6 +70,7 @@ function App() {
               <StretchingInputForm setExercises={handleGenerateExerciseSet} />
               <ExcerciseBoard
                 exercises={exercises[selectedExerciseType] || []}
+                formTitle="Stretching Exercises"
               />
             </>
           );
@@ -90,7 +94,7 @@ function App() {
       <select value={selectedExerciseType} onChange={handleExerciseTypeChange}>
         <option value="">Select an exercise type</option>
         <option value="strength">Strength Training</option>
-        <option value="cardio">Cardio</option>
+        <option value="cardio">Cardiovascular</option>
         <option value="plyometrics">Plyometrics</option>
         <option value="stretching">Stretching</option>
       </select>

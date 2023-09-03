@@ -3,13 +3,14 @@ import './exerciseBoard.css'
 import ExerciseCard from "../exerciseCard/ExerciseCard";
 
 type AddEntityFormProps = {
-  exercises: Exercise[];
+  exercises: Exercise[],
+  formTitle: string
 };
 
-const ExcerciseBoard = ({ exercises }: AddEntityFormProps) => {
+const ExcerciseBoard = ({ exercises, formTitle }: AddEntityFormProps) => {
   return (
     <div>
-      <h2>Exercises</h2>
+      <h2>{formTitle}</h2>
       <div className='container'>
         <div className='row card-gaps'>
           {exercises.map((exercise) => (
