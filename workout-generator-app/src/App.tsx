@@ -87,7 +87,7 @@ function App() {
       <h2>How to use?</h2>
       <p>
         Fill out the inputs below, click generate to get a list of exercise
-        cards, pick the number of specified cards, perform the exercises and
+        cards for each exercise type, flip the cards, save the program and
         save the program if you like it.
       </p>
       <label>Select Exercise Type:</label>
