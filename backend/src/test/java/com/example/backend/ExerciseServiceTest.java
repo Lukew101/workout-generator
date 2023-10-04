@@ -19,7 +19,6 @@ public class ExerciseServiceTest {
         try {
             ExerciseResponseDTO exerciseResponseDTO = new ExerciseResponseDTO(30, "strength", "biceps", "beginner");
             List<ExerciseAPIResponseDTO> exerciseList = exerciseService.getExerciseList(exerciseResponseDTO);
-            System.out.println("Exercise List: " + exerciseList);
         } catch (Exception e) {
             e.printStackTrace();
         }
