@@ -1,10 +1,12 @@
 package com.example.backend;
 
+import com.example.backend.controller.ExerciseAPIResponseDTO;
+import com.example.backend.controller.ExerciseResponseDTO;
+import com.example.backend.service.ExerciseService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.net.http.HttpClient;
 import java.util.List;
 
 

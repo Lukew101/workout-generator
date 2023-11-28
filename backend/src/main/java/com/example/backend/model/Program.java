@@ -1,4 +1,6 @@
-package com.example.backend;
+package com.example.backend.model;
+
+import com.example.backend.model.Exercise;
 
 import java.util.ArrayList;
 import java.util.List;

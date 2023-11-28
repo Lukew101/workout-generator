@@ -1,5 +1,7 @@
-package com.example.backend;
+package com.example.backend.service;
 
+import com.example.backend.controller.ExerciseAPIResponseDTO;
+import com.example.backend.controller.ExerciseResponseDTO;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;

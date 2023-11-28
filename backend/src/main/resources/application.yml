@@ -15,4 +15,4 @@ spring:
   sql:
     init:
       platform: postgresql
-      mode: always # run initialisation scripts or not
+      mode: always
