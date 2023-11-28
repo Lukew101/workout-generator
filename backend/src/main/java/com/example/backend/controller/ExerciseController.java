@@ -11,17 +11,17 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 @CrossOrigin(origins = "*")
-public class ApplicationController {
+public class ExerciseController {
 
     private final ExerciseService exerciseService;
 
     @Autowired
-    public ApplicationController(ExerciseService exerciseService) {
+    public ExerciseController(ExerciseService exerciseService) {
         this.exerciseService = exerciseService;
     }
 
     @PostMapping("/exercises")
-    ResponseEntity<List<ExerciseAPIResponseDTO>> getExerciseList(
+    ResponseEntity<ExerciseListDTO> getExerciseList(
             @RequestParam("duration") int duration,
             @RequestParam("type") String type,
             @RequestParam("muscle") String muscle,
@@ -29,6 +29,6 @@ public class ApplicationController {
     ) throws IOException, InterruptedException {
         ExerciseResponseDTO exerciseResponseDTO = new ExerciseResponseDTO(duration, type, muscle, difficulty);
         List<ExerciseAPIResponseDTO> exerciseList = exerciseService.getExerciseList(exerciseResponseDTO);
-        return ResponseEntity.ok(exerciseList);
+        return ResponseEntity.ok(new ExerciseListDTO(exerciseList));
     }
 }
