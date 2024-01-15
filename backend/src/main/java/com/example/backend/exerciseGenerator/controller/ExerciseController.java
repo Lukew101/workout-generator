@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/exercise")
 @CrossOrigin(origins = "*")
 public class ExerciseController {
 
@@ -20,7 +20,7 @@ public class ExerciseController {
         this.exerciseService = exerciseService;
     }
 
-    @PostMapping("/exercises")
+    @PostMapping("/exerciseList")
     ResponseEntity<List<ExerciseAPIResponseDTO>> getExerciseList(
             @RequestParam("duration") int duration,
             @RequestParam("type") String type,

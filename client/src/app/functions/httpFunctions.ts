@@ -1,6 +1,6 @@
 export async function postForm(formData: FormData, setExercises: (exercises: Exercise[]) => void) {
     try {
-        const response = await fetch("http://localhost:8080/api/exercises", {
+        const response = await fetch("http://localhost:8080/api/exercise/exerciseList", {
             method: "POST",
             body: formData,
         });
