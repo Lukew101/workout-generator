@@ -1,4 +1,4 @@
-package com.example.backend.controller;
+package com.example.backend.exerciseGenerator.controller;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

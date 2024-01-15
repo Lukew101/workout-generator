@@ -1,6 +1,6 @@
-package com.example.backend.controller;
+package com.example.backend.exerciseGenerator.controller;
 
-import com.example.backend.service.ExerciseService;
+import com.example.backend.exerciseGenerator.service.ExerciseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
