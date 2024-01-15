@@ -21,7 +21,7 @@ public class ExerciseController {
     }
 
     @PostMapping("/exercises")
-    ResponseEntity<ExerciseListDTO> getExerciseList(
+    ResponseEntity<List<ExerciseAPIResponseDTO>> getExerciseList(
             @RequestParam("duration") int duration,
             @RequestParam("type") String type,
             @RequestParam("muscle") String muscle,
@@ -29,6 +29,6 @@ public class ExerciseController {
     ) throws IOException, InterruptedException {
         ExerciseResponseDTO exerciseResponseDTO = new ExerciseResponseDTO(duration, type, muscle, difficulty);
         List<ExerciseAPIResponseDTO> exerciseList = exerciseService.getExerciseList(exerciseResponseDTO);
-        return ResponseEntity.ok(new ExerciseListDTO(exerciseList));
+        return ResponseEntity.ok(exerciseList);
     }
 }

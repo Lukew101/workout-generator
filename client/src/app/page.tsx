@@ -1,4 +1,10 @@
-import Image from "next/image";
+"use client"
+import StrengthTrainingInputForm from "./components/userInput/StrengthTrainingInput";
+import ExcerciseBoard from "./components/ExerciseBoard";
+import CardioInputForm from "./components/userInput/CardioTrainingInput";
+import PlyometricsInputForm from "./components/userInput/PlyometricsInput";
+import StretchingInputForm from "./components/userInput/StretchingInput";
+import { useState } from "react";
 
 export default function Home() {
   const [selectedExerciseType, setSelectedExerciseType] = useState("");
