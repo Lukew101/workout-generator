@@ -1,8 +1,8 @@
 package com.example.backend;
 
-import com.example.backend.exerciseGenerator.controller.ExerciseAPIResponseDTO;
-import com.example.backend.exerciseGenerator.controller.ExerciseResponseDTO;
-import com.example.backend.exerciseGenerator.service.ExerciseService;
+import com.example.backend.exercise_generator.controller.ExerciseAPIResponseDTO;
+import com.example.backend.exercise_generator.controller.ExerciseResponseDTO;
+import com.example.backend.exercise_generator.service.ExerciseService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

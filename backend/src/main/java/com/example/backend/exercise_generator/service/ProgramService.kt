@@ -1,4 +1,4 @@
-package com.example.backend.exerciseGenerator.service
+package com.example.backend.exercise_generator.service
 
 import org.springframework.stereotype.Service
 

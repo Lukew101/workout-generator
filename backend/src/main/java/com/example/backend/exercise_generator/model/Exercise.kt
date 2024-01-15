@@ -1,4 +1,4 @@
-package com.example.backend.exerciseGenerator.model
+package com.example.backend.exercise_generator.model
 
 import jakarta.persistence.*
 

@@ -1,6 +1,6 @@
-package com.example.backend.exerciseGenerator.Repository
+package com.example.backend.exercise_generator.repository
 
-import com.example.backend.exerciseGenerator.model.Program
+import com.example.backend.exercise_generator.model.Program
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 

@@ -1,4 +1,4 @@
-package com.example.backend.exerciseGenerator.controller;
+package com.example.backend.exercise_generator.controller;
 
 import java.util.List;
 
