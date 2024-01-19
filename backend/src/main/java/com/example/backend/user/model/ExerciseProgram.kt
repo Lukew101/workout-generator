@@ -1,9 +1,10 @@
-package com.example.backend.exercise_generator.model
+package com.example.backend.user.model
 
+import com.example.backend.exercise_generator.model.Exercise
 import jakarta.persistence.*
 
 @Entity
-class Program (
+class ExerciseProgram (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
