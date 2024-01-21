@@ -89,12 +89,7 @@ export default function Home() {
   return (
     <main>
       <h1>The Workout Generator</h1>
-      <h2>How to use?</h2>
-      <p>
-        Fill out the inputs below, click generate to get a list of exercise
-        cards for each exercise type, flip the cards, save the program and save
-        the program if you like it.
-      </p>
+      <h2>Create your workout</h2>
       <label>Select Exercise Type:</label>
       <select value={selectedExerciseType} onChange={handleExerciseTypeChange}>
         <option value="">Select an exercise type</option>
