@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import StrengthTrainingInputForm from "./components/userInput/StrengthTrainingInput";
 import ExcerciseBoard from "./components/ExerciseBoard";
 import CardioInputForm from "./components/userInput/CardioTrainingInput";
@@ -30,52 +30,58 @@ export default function Home() {
 
   const renderExerciseFormAndBoard = () => {
     if (selectedExerciseType) {
-      switch (selectedExerciseType) {
-        case "strength":
-          return (
-            <>
+      const selectedExerciseInputForm = () => {
+        switch (selectedExerciseType) {
+          case "strength":
+            return (
               <StrengthTrainingInputForm
                 setExercises={handleGenerateExerciseSet}
               />
-              <ExcerciseBoard
-                exercises={exercises[selectedExerciseType] || []}
-                formTitle="Strength Exercises"
-              />
-            </>
-          );
-        case "cardio":
-          return (
-            <>
-              <CardioInputForm setExercises={handleGenerateExerciseSet} />
-              <ExcerciseBoard
-                exercises={exercises[selectedExerciseType] || []}
-                formTitle="Cardiovascular Exercises"
-              />
-            </>
-          );
-        case "plyometrics":
-          return (
-            <>
+            );
+          case "cardio":
+            return <CardioInputForm setExercises={handleGenerateExerciseSet} />;
+          case "plyometrics":
+            return (
               <PlyometricsInputForm setExercises={handleGenerateExerciseSet} />
-              <ExcerciseBoard
-                exercises={exercises[selectedExerciseType] || []}
-                formTitle="Plyometric Exercises"
-              />
-            </>
-          );
-        case "stretching":
-          return (
-            <>
+            );
+          case "stretching":
+            return (
               <StretchingInputForm setExercises={handleGenerateExerciseSet} />
-              <ExcerciseBoard
-                exercises={exercises[selectedExerciseType] || []}
-                formTitle="Stretching Exercises"
-              />
-            </>
-          );
-        default:
-          return null;
-      }
+            );
+          default:
+            return null;
+        }
+      };
+
+      return (
+        <>
+          {selectedExerciseInputForm()}
+          {exercises["strength"] && (
+            <ExcerciseBoard
+              exercises={exercises["strength"] || []}
+              formTitle="Strength Exercises"
+            />
+          )}
+          {exercises["cardio"] && (
+            <ExcerciseBoard
+              exercises={exercises["cardio"] || []}
+              formTitle="Cardiovascular Exercises"
+            />
+          )}
+          {exercises["plyometrics"] && (
+            <ExcerciseBoard
+              exercises={exercises["plyometrics"] || []}
+              formTitle="Plyometric Exercises"
+            />
+          )}
+          {exercises["stretching"] && (
+            <ExcerciseBoard
+              exercises={exercises["stretching"] || []}
+              formTitle="Stretching Exercises"
+            />
+          )}
+        </>
+      );
     }
     return null;
   };
