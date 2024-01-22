@@ -59,6 +59,9 @@ public class ExerciseService {
             default -> 0;
         };
 
+        // Assign reps, sets, times etc.
+        // Ensure these get assigned randomly, but equate to the time.
+
         if (responseExerciseList.size() < numExercises) {
             numExercises = responseExerciseList.size();
         }
