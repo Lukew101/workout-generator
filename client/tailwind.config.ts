@@ -14,13 +14,12 @@ const config: Config = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
           'landing-page': "url('/geert-pieters-3RnkZpDqsEI-unsplash.jpg')"
       },
-
       colors: {
         primary: '#DEE0E4',
         secondary: '#DEE0E4',
         accent: '#8F6449',
         background: '#293040'
-      }
+      }  
     },
   },
   plugins: [],
