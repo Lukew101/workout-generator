@@ -15,7 +15,7 @@ const config: Config = {
           'landing-page': "url('/geert-pieters-3RnkZpDqsEI-unsplash.jpg')"
       },
       colors: {
-        primary: '#DEE0E4',
+        primaryColor: '#DEE0E4',
         secondary: '#DEE0E4',
         accent: '#8F6449',
         background: '#293040'

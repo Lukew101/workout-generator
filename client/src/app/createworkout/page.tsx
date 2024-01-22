@@ -59,25 +59,25 @@ export default function CreateWorkout() {
           {exercises["strength"] && (
             <ExcerciseBoard
               exercises={exercises["strength"] || []}
-              formTitle="Strength Exercises"
+              formTitle="Strength Training"
             />
           )}
           {exercises["cardio"] && (
             <ExcerciseBoard
               exercises={exercises["cardio"] || []}
-              formTitle="Cardiovascular Exercises"
+              formTitle="Cardiovascular Training"
             />
           )}
           {exercises["plyometrics"] && (
             <ExcerciseBoard
               exercises={exercises["plyometrics"] || []}
-              formTitle="Plyometric Exercises"
+              formTitle="Plyometric Training"
             />
           )}
           {exercises["stretching"] && (
             <ExcerciseBoard
               exercises={exercises["stretching"] || []}
-              formTitle="Stretching Exercises"
+              formTitle="Stretching Training"
             />
           )}
         </>
@@ -87,10 +87,8 @@ export default function CreateWorkout() {
   };
 
   return (
-    <main>
-      <h1>The Workout Generator</h1>
+    <main className="mt-24 flex flex-col items-center">
       <h2>Create your workout</h2>
-      <label>Select Exercise Type:</label>
       <select value={selectedExerciseType} onChange={handleExerciseTypeChange}>
         <option value="">Select an exercise type</option>
         <option value="strength">Strength Training</option>
