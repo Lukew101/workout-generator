@@ -16,3 +16,13 @@ spring:
     init:
       platform: postgresql
       mode: always
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${ISSUER_URI}
+logging:
+  level:
+    org:
+      springframework:
+        security: TRACE
