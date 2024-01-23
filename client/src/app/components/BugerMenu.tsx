@@ -7,7 +7,8 @@ import { useRouter } from "next/navigation";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import { useState } from "react";
-import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
+import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
+import LoginButton from "./LoginButton";
 
 export default function BurgerMenu() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -22,9 +23,9 @@ export default function BurgerMenu() {
   };
 
   const overrideMenuItemheight = () => ({
-    minHeight: "50px", 
-    '@media (min-width: 600px)': {
-      minHeight: '50px', 
+    minHeight: "50px",
+    "@media (min-width: 600px)": {
+      minHeight: "50px",
     },
   });
 
@@ -57,11 +58,21 @@ export default function BurgerMenu() {
         onClick={handleClose}
         className="mt-1"
       >
-        <MenuItem  sx={overrideMenuItemheight()} onClick={() => router.push("/")}>
+        <MenuItem
+          sx={overrideMenuItemheight()}
+          onClick={() => router.push("/")}
+        >
           <HomeIcon /> <p className="pl-2">Home</p>
         </MenuItem>
-        <MenuItem sx={overrideMenuItemheight()} onClick={() => router.push("/createworkout")}>
-          <FitnessCenterIcon /><p className="pl-2">Create Workout</p>
+        <MenuItem
+          sx={overrideMenuItemheight()}
+          onClick={() => router.push("/createworkout")}
+        >
+          <FitnessCenterIcon />
+          <p className="pl-2">Create Workout</p>
+        </MenuItem>
+        <MenuItem>
+          <LoginButton />
         </MenuItem>
         {/* <MenuItem onClick={() => router.push("/my")}>
           <p className="pl-2">My workouts</p>
