@@ -12,10 +12,10 @@ const ExcerciseBoard = ({ exercises, formTitle }: AddEntityFormProps) => {
       <h2>{formTitle}</h2>
       <div className='container'>
         <div className='row card-gaps'>
-          {exercises.map((exercise) => (
+          {exercises.map((exercise, index) => (
             <div className='col-md-4'>
               <ExerciseCard
-                key={exercise.name}
+                key={index}
                 exercise={exercise} />
             </div>
           ))}
