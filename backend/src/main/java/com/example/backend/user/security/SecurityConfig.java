@@ -13,19 +13,21 @@ import java.util.List;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
+import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
     @Bean
-    SecurityFilterChain defaultChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         return http
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(antMatcher("/api/exercise/**")).permitAll().anyRequest().authenticated()
+                .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers(antMatcher("/api/exercise/**")).permitAll()
                 )
                 .cors(withDefaults())
                 .oauth2ResourceServer(auth -> auth.jwt(withDefaults()))
+                .csrf(CsrfConfigurer::disable)
                 .build();
     }
 
@@ -40,3 +42,4 @@ public class SecurityConfig {
         return source;
     }
 }
+
