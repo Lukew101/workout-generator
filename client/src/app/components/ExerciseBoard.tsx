@@ -1,28 +1,24 @@
-import 'bootstrap/dist/css/bootstrap.css';
+import "bootstrap/dist/css/bootstrap.css";
 import ExerciseCard from "./ExerciseCard";
 
 type AddEntityFormProps = {
-  exercises: Exercise[],
-  formTitle: string
+  exercises: Exercise[];
+  formTitle: string;
 };
 
 const ExcerciseBoard = ({ exercises, formTitle }: AddEntityFormProps) => {
   return (
     <div>
       <h2>{formTitle}</h2>
-      <div className='container'>
-        <div className='row card-gaps'>
+      <div className="container">
+        <div className="row card-gaps">
           {exercises.map((exercise, index) => (
-            <div className='col-md-4'>
-              <ExerciseCard
-                key={index}
-                exercise={exercise} />
-            </div>
+            <ExerciseCard key={index} exercise={exercise} />
           ))}
-        </div> 
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ExcerciseBoard
+export default ExcerciseBoard;
