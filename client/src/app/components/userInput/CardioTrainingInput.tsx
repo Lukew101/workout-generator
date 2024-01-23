@@ -1,4 +1,3 @@
-import "bootstrap/dist/css/bootstrap.css";
 import { FormEvent } from "react";
 import { postForm } from "../../functions/httpFunctions";
 
