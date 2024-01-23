@@ -22,7 +22,7 @@ public class SecurityConfig {
     SecurityFilterChain defaultChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(antMatcher("api/exercise")).permitAll().anyRequest().authenticated()
+                        .requestMatchers(antMatcher("/api/exercise/**")).permitAll().anyRequest().authenticated()
                 )
                 .cors(withDefaults())
                 .oauth2ResourceServer(auth -> auth.jwt(withDefaults()))
