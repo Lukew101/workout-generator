@@ -74,15 +74,15 @@ export default function BurgerMenu() {
           <FitnessCenterIcon />
           <p className="pl-2">Create Workout</p>
         </MenuItem>
+        {user && (
+          <MenuItem onClick={() => router.push("/myworkouts")}>
+            <p className="pl-2">My workouts</p>
+          </MenuItem>
+        )}
         {user ? (
-          <>
-            <MenuItem onClick={() => router.push("/myworkouts")}>
-              <p className="pl-2">My workouts</p>
-            </MenuItem>
-            <MenuItem>
-              <LogoutButton />
-            </MenuItem>
-          </>
+          <MenuItem>
+            <LogoutButton />
+          </MenuItem>
         ) : (
           <MenuItem>
             <LoginButton />
