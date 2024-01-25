@@ -8,9 +8,10 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import { useState } from "react";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
-import LoginButton from "./LoginButton";
 import { useUser } from "@auth0/nextjs-auth0/client";
-import LogoutButton from "./LogoutButton";
+import LogoutIcon from '@mui/icons-material/Logout';
+import PersonIcon from '@mui/icons-material/Person';
+import LoginIcon from '@mui/icons-material/Login';
 
 export default function BurgerMenu() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -76,16 +77,16 @@ export default function BurgerMenu() {
         </MenuItem>
         {user && (
           <MenuItem onClick={() => router.push("/myworkouts")}>
-            <p className="pl-2">My workouts</p>
+            <PersonIcon /><p className="pl-2">My Workouts</p>
           </MenuItem>
         )}
         {user ? (
-          <MenuItem>
-            <LogoutButton />
+          <MenuItem onClick={() => router.push("/api/auth/logout")}>
+            <LogoutIcon /><p className="pl-2">Logout</p>
           </MenuItem>
         ) : (
-          <MenuItem>
-            <LoginButton />
+          <MenuItem onClick={() => router.push("/api/auth/login")}>
+            <LoginIcon /><p className="pl-2">Login</p>
           </MenuItem>
         )}
       </Menu>
