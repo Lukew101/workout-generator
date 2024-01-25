@@ -8,9 +8,7 @@ import StretchingInputForm from "../components/userInput/StretchingInput";
 
 export default function CreateWorkout() {
   const [selectedExerciseType, setSelectedExerciseType] = useState("");
-  const [exercises, setExercises] = useState<{
-    [key: string]: Exercise[];
-  }>({});
+  const [exercises, setExercises] = useState<Exercise[]>([]);
 
   const handleExerciseTypeChange = (
     event: React.ChangeEvent<HTMLSelectElement>
@@ -18,14 +16,11 @@ export default function CreateWorkout() {
     setSelectedExerciseType(event.target.value);
   };
 
-  const handleGenerateExerciseSet = (exercises: Exercise[]) => {
-    setExercises((prevExercises) => ({
+  const handleGenerateExerciseSet = (generatedExercises: Exercise[]) => {
+    setExercises((prevExercises) => [
       ...prevExercises,
-      [selectedExerciseType]: [
-        ...(prevExercises[selectedExerciseType] || []),
-        ...exercises,
-      ],
-    }));
+      ...generatedExercises,
+    ]);
   };
 
   const renderExerciseForm = () => {
@@ -56,29 +51,8 @@ export default function CreateWorkout() {
       return (
         <>
           {selectedExerciseInputForm()}
-          {exercises["strength"] && (
-            <ExcerciseBoard
-              exercises={exercises["strength"] || []}
-              formTitle="Strength Training"
-            />
-          )}
-          {exercises["cardio"] && (
-            <ExcerciseBoard
-              exercises={exercises["cardio"] || []}
-              formTitle="Cardiovascular Training"
-            />
-          )}
-          {exercises["plyometrics"] && (
-            <ExcerciseBoard
-              exercises={exercises["plyometrics"] || []}
-              formTitle="Plyometric Training"
-            />
-          )}
-          {exercises["stretching"] && (
-            <ExcerciseBoard
-              exercises={exercises["stretching"] || []}
-              formTitle="Stretching Training"
-            />
+          {exercises.length > 0 && (
+            <ExcerciseBoard exercises={exercises} formTitle="Exercises" />
           )}
         </>
       );
