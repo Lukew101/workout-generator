@@ -5,6 +5,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import GenerateButton from "./GenerateButton";
 
 interface AddEntityFormProps {
   setExercises: (exercises: Exercise[]) => void;
@@ -38,9 +39,8 @@ const CardioInputForm = ({ setExercises }: AddEntityFormProps) => {
   };
 
   return (
-    <div className="text-center mb-5">
-      <h2 className="mt-1 font-bold">Cardiovascular Training</h2>
-      <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+    <div className="mb-5 flex flex-col items-center">
+      <FormControl variant="standard" sx={{ m: 1, minWidth: 250 }}>
         <InputLabel id="demo-simple-select-standard-label">Duration</InputLabel>
         <Select
           labelId="demo-simple-select-standard-label"
@@ -55,7 +55,7 @@ const CardioInputForm = ({ setExercises }: AddEntityFormProps) => {
           <MenuItem value={"60"}>60 mins</MenuItem>
         </Select>
       </FormControl>
-      <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+      <FormControl variant="standard" sx={{ m: 1, minWidth: 250 }}>
         <InputLabel id="demo-simple-select-standard-label">
           Difficulty
         </InputLabel>
@@ -70,9 +70,7 @@ const CardioInputForm = ({ setExercises }: AddEntityFormProps) => {
           <MenuItem value={"intermediate"}>Intermediate</MenuItem>
         </Select>
       </FormControl>
-      <button onClick={handleFormSubmit} type="submit" className="form__button">
-        Generate
-      </button>
+      <GenerateButton handleFormSubmit={handleFormSubmit} />
     </div>
   );
 };

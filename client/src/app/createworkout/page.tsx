@@ -69,7 +69,7 @@ export default function CreateWorkout() {
           build your program
         </p>
       </div>
-      <div>
+      <div className="w-64">
         <select
           value={selectedExerciseType}
           onChange={handleExerciseTypeChange}
@@ -81,8 +81,8 @@ export default function CreateWorkout() {
           <option value="plyometrics">Plyometrics</option>
           <option value="stretching">Stretching</option>
         </select>
-      </div>
-      {renderExerciseForm()}
+        {renderExerciseForm()}
+      </div>  
     </main>
   );
 }
