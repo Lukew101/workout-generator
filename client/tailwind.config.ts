@@ -1,4 +1,4 @@
-import type { Config } from 'tailwindcss'
+import { Config } from 'windicss/types/interfaces'
 
 const config: Config = {
   content: [
@@ -18,6 +18,8 @@ const config: Config = {
         primaryColor: '#DEE0E4',
         secondary: '#DEE0E4',
         accent: '#8F6449',
+        accentDark: '#74482C',
+        accentLight: '#B07D5D',
         background: '#293040'
       }  
     },
