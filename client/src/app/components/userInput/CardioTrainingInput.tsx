@@ -12,10 +12,10 @@ interface AddEntityFormProps {
 
 const CardioInputForm = ({ setExercises }: AddEntityFormProps) => {
   const [formData, setFormData] = useState({
-    duration: "",
+    duration: "15",
     type: "cardio",
     muscle: "",
-    difficulty: "",
+    difficulty: "beginner",
   });
 
   const handleDurationChange = (event: SelectChangeEvent) => {
@@ -32,27 +32,8 @@ const CardioInputForm = ({ setExercises }: AddEntityFormProps) => {
     }));
   };
 
-  // const buildFormData = (formElement: HTMLFormElement): FormData => {
-  //   const formData = new FormData();
-
-  //   const { duration, type, muscle, difficulty } = formElement;
-
-  //   formData.append("duration", duration.value);
-  //   formData.append("type", type.value);
-  //   formData.append("muscle", muscle?.value || "");
-  //   formData.append("difficulty", difficulty?.value || "");
-
-  //   return formData;
-  // };
-
   const handleFormSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
-
-    // const formElement = event.target as HTMLFormElement;
-    // const formData = buildFormData(formElement);
-
-    // console.log(formData);
-
     postForm(formData, setExercises);
   };
 
