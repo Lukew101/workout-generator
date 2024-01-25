@@ -28,7 +28,7 @@ export default function CreateWorkout() {
     }));
   };
 
-  const renderExerciseFormAndBoard = () => {
+  const renderExerciseForm = () => {
     if (selectedExerciseType) {
       const selectedExerciseInputForm = () => {
         switch (selectedExerciseType) {
@@ -88,15 +88,27 @@ export default function CreateWorkout() {
 
   return (
     <main className="mt-24 flex flex-col items-center">
-      <h2>Create your workout</h2>
-      <select value={selectedExerciseType} onChange={handleExerciseTypeChange}>
-        <option value="">Select an exercise type</option>
-        <option value="strength">Strength Training</option>
-        <option value="cardio">Cardiovascular</option>
-        <option value="plyometrics">Plyometrics</option>
-        <option value="stretching">Stretching</option>
-      </select>
-      {renderExerciseFormAndBoard()}
+      <div className="text-center mb-3">
+        <h2 className="text-4xl mb-2">Create your workout</h2>
+        <p className="text-sm">
+          Select an exercise type, fill out the form, generate exercises and
+          build your program
+        </p>
+      </div>
+      <div>
+        <select
+          value={selectedExerciseType}
+          onChange={handleExerciseTypeChange}
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        >
+          <option value="">Select an exercise type</option>
+          <option value="strength">Strength Training</option>
+          <option value="cardio">Cardiovascular</option>
+          <option value="plyometrics">Plyometrics</option>
+          <option value="stretching">Stretching</option>
+        </select>
+      </div>
+      {renderExerciseForm()}
     </main>
   );
 }
