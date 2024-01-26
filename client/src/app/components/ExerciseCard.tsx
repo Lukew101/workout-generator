@@ -10,7 +10,7 @@ const ExerciseCard = ({ exercise }: ExerciseProps) => {
   const toggleFlipped = () => {
     setIsFlipped(!isFlipped);
   };
-  
+
   return (
     <div
       className={`card-container ${isFlipped ? "flipped" : ""}`}
@@ -21,26 +21,20 @@ const ExerciseCard = ({ exercise }: ExerciseProps) => {
           <p className="click-to-flip">Click to view exercise</p>
         </div>
         <div className="card-back">
-          <div>
-            <h2 className="card-title card-title-multi-line">
-              {exercise.name}
-            </h2>
-            <p className="instructions-style">{exercise.instructions}</p>
-          </div>
-          <div>
+          <h2 className="card-title card-title-multi-line">{exercise.name}</h2>
+          <p className="instructions-style">{exercise.instructions}</p>
+          <div className="grid grid-cols-2 gap-5">
             <div>
-              <div>
-                <h3 className="card-subtitle">Equipment</h3>
-                <p>{exercise.equipment}</p>
-              </div>
-              <div>
-                <h3 className="card-subtitle">Difficulty</h3>
-                <p>{exercise.difficulty}</p>
-              </div>
-              <div>
-                <h3 className="card-subtitle">Muscle/s</h3>
-                <p>{exercise.muscle}</p>
-              </div>
+              <h3 className="card-subtitle">Equipment</h3>
+              <p>{exercise.equipment}</p>
+            </div>
+            <div>
+              <h3 className="card-subtitle">Difficulty</h3>
+              <p>{exercise.difficulty}</p>
+            </div>
+            <div>
+              <h3 className="card-subtitle">Muscle/s</h3>
+              <p>{exercise.muscle}</p>
             </div>
           </div>
         </div>
