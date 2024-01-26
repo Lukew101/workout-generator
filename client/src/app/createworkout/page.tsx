@@ -17,10 +17,7 @@ export default function CreateWorkout() {
   };
 
   const handleGenerateExerciseSet = (generatedExercises: Exercise[]) => {
-    setExercises((prevExercises) => [
-      ...prevExercises,
-      ...generatedExercises,
-    ]);
+    setExercises((prevExercises) => [...prevExercises, ...generatedExercises]);
   };
 
   const renderExerciseForm = () => {
@@ -47,15 +44,7 @@ export default function CreateWorkout() {
             return null;
         }
       };
-
-      return (
-        <>
-          {selectedExerciseInputForm()}
-          {exercises.length > 0 && (
-            <ExcerciseBoard exercises={exercises} formTitle="Exercises" />
-          )}
-        </>
-      );
+      return selectedExerciseInputForm();
     }
     return null;
   };
@@ -63,7 +52,7 @@ export default function CreateWorkout() {
   return (
     <main className="mt-24 flex flex-col items-center">
       <div className="text-center mb-3">
-        <h2 className="text-4xl mb-2">Create your workout</h2>
+        <h2 className="text-5xl mb-2">Create your workout</h2>
         <p className="text-sm">
           Select an exercise type, fill out the form, generate exercises and
           build your program
@@ -82,7 +71,10 @@ export default function CreateWorkout() {
           <option value="stretching">Stretching</option>
         </select>
         {renderExerciseForm()}
-      </div>  
+      </div>
+      {exercises.length > 0 && (
+        <ExcerciseBoard exercises={exercises} />
+      )}
     </main>
   );
 }
