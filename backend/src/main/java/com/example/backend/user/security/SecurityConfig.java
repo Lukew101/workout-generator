@@ -23,10 +23,12 @@ public class SecurityConfig {
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(antMatcher("/api/exercise/**")).permitAll()
+                        .requestMatchers(antMatcher("/api/exercise/exerciseList"), antMatcher("/api/status")).permitAll()
                 )
                 .cors(withDefaults())
-                .oauth2ResourceServer(auth -> auth.jwt(withDefaults()))
+                .oauth2ResourceServer(auth ->
+                        auth.jwt(withDefaults())
+                )
                 .csrf(CsrfConfigurer::disable)
                 .build();
     }
