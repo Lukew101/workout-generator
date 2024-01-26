@@ -1,4 +1,4 @@
-import { Config } from 'windicss/types/interfaces'
+import { Config } from 'tailwindcss';
 
 const config: Config = {
   content: [
