@@ -1,15 +1,22 @@
 # Workout Generator
 
-This is a website/app that generates random training exercises for individual training sessions. It is built using React and TypeScript.
+This is a application that generates random training exercises for individual training sessions based on the users inputs. 
 
 ## Features
 
 - Randomly generates training exercises based on user preferences.
 - Allows users to select specific muscle groups or exercise types.
 - Provides detailed exercise descriptions and instructions.
-- Tracks completed exercises and progress.
 - Offers a variety of difficulty levels for exercises.
 - Responsive design for optimal usage on different devices.
+
+## Future Features
+- Save workouts and access them on a personal account.
+- Track progress within the wokouts.
+- Images to demonstrate exercises.
+- Progress or regress exercises within a workout.
+- Workouts for injury rehab.
+- Workouts for different health conditions.
 
 ## 📱 Tech Stack
 ![Docker](https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white)
