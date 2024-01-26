@@ -2,15 +2,14 @@ import ExerciseCard from "./ExerciseCard";
 
 type AddEntityFormProps = {
   exercises: Exercise[];
-  formTitle: string;
 };
 
-const ExcerciseBoard = ({ exercises, formTitle }: AddEntityFormProps) => {
+const ExcerciseBoard = ({ exercises }: AddEntityFormProps) => {
   return (
-    <div>
-      <h2>{formTitle}</h2>
+    <div className="w-full my-3">
+      <h2 className="text-center text-2xl font-semibold mb-3">Exercises</h2>
       <div>
-        <div>
+        <div className="flex justify-center flex-wrap gap-3">
           {exercises.map((exercise, index) => (
             <ExerciseCard key={index} exercise={exercise} />
           ))}
