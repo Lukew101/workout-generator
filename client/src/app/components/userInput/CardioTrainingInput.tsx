@@ -1,82 +1,76 @@
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 import { postForm } from "../../functions/httpFunctions";
+import * as React from "react";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import GenerateButton from "./GenerateButton";
 
 interface AddEntityFormProps {
   setExercises: (exercises: Exercise[]) => void;
 }
 
 const CardioInputForm = ({ setExercises }: AddEntityFormProps) => {
-  function buildFormData(formElement: HTMLFormElement): FormData {
-    const formData = new FormData();
+  const [formData, setFormData] = useState({
+    duration: "15",
+    type: "cardio",
+    muscle: "",
+    difficulty: "beginner",
+  });
 
-    const duration = formElement.duration.value;
-    formData.append("duration", duration);
+  const handleDurationChange = (event: SelectChangeEvent) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      duration: event.target.value,
+    }));
+  };
 
-    const trainingType = formElement.type.value;
-    formData.append("type", trainingType);
+  const handleDifficultyChange = (event: SelectChangeEvent) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      difficulty: event.target.value,
+    }));
+  };
 
-    const muscleField = formElement.muscle;
-    const muscle = muscleField ? muscleField.value : "";
-    formData.append("muscle", muscle);
-
-    const difficultyField = formElement.difficulty;
-    const difficulty = difficultyField ? difficultyField.value : "";
-    formData.append("difficulty", difficulty);
-
-    return formData;
-  }
-
-  const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
-
-    const formElement = event.target as HTMLFormElement;
-    const formData = buildFormData(formElement);
-
-    console.log(formData);
-
     postForm(formData, setExercises);
   };
 
   return (
-    <div>
-      <h2>Cardio</h2>
-      <form onSubmit={handleFormSubmit} id="muscle1FormInput">
-        <label>Session Duration</label>
-        <select
-          className="form-select"
-          name="duration"
-          defaultValue=""
-          id="trainingDuration"
+    <div className="mb-5 flex flex-col items-center">
+      <FormControl variant="standard" sx={{ m: 1, minWidth: 250 }}>
+        <InputLabel id="demo-simple-select-standard-label">Duration</InputLabel>
+        <Select
+          labelId="demo-simple-select-standard-label"
+          id="demo-simple-select-standard"
+          value={formData.duration}
+          onChange={handleDurationChange}
+          label="duration"
         >
-          <option value="15">&lt; 15 minutes</option>
-          <option value="30">30 minutes</option>
-          <option value="45">45 minutes</option>
-          <option value="60">60 minutes</option>
-        </select>
-        <label>Training type</label>
-        <select
-          className="form-select"
-          name="type"
-          defaultValue=""
-          id="trainingType"
-          disabled
+          <MenuItem value={"15"}>15 mins</MenuItem>
+          <MenuItem value={"30"}>30 mins</MenuItem>
+          <MenuItem value={"45"}>45 mins</MenuItem>
+          <MenuItem value={"60"}>60 mins</MenuItem>
+        </Select>
+      </FormControl>
+      <FormControl variant="standard" sx={{ m: 1, minWidth: 250 }}>
+        <InputLabel id="demo-simple-select-standard-label">
+          Difficulty
+        </InputLabel>
+        <Select
+          labelId="demo-simple-select-standard-label"
+          id="demo-simple-select-standard"
+          value={formData.difficulty}
+          onChange={handleDifficultyChange}
+          label="difficulty"
         >
-          <option value="cardio">Cardio</option>
-        </select>
-        <label>Difficulty</label>
-        <select
-          className="form-select"
-          name="difficulty"
-          defaultValue=""
-          id="trainingType"
-        >
-          <option value="beginner">Beginner</option>
-          <option value="intermediate">Intermediate</option>
-        </select>
-        <button type="submit" className="form__button">
-          Generate
-        </button>
-      </form>
+          <MenuItem value={"beginner"}>Beginner</MenuItem>
+          <MenuItem value={"intermediate"}>Intermediate</MenuItem>
+        </Select>
+      </FormControl>
+      <GenerateButton handleFormSubmit={handleFormSubmit} />
     </div>
   );
 };

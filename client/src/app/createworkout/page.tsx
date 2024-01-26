@@ -8,9 +8,7 @@ import StretchingInputForm from "../components/userInput/StretchingInput";
 
 export default function CreateWorkout() {
   const [selectedExerciseType, setSelectedExerciseType] = useState("");
-  const [exercises, setExercises] = useState<{
-    [key: string]: Exercise[];
-  }>({});
+  const [exercises, setExercises] = useState<Exercise[]>([]);
 
   const handleExerciseTypeChange = (
     event: React.ChangeEvent<HTMLSelectElement>
@@ -18,17 +16,14 @@ export default function CreateWorkout() {
     setSelectedExerciseType(event.target.value);
   };
 
-  const handleGenerateExerciseSet = (exercises: Exercise[]) => {
-    setExercises((prevExercises) => ({
+  const handleGenerateExerciseSet = (generatedExercises: Exercise[]) => {
+    setExercises((prevExercises) => [
       ...prevExercises,
-      [selectedExerciseType]: [
-        ...(prevExercises[selectedExerciseType] || []),
-        ...exercises,
-      ],
-    }));
+      ...generatedExercises,
+    ]);
   };
 
-  const renderExerciseFormAndBoard = () => {
+  const renderExerciseForm = () => {
     if (selectedExerciseType) {
       const selectedExerciseInputForm = () => {
         switch (selectedExerciseType) {
@@ -56,29 +51,8 @@ export default function CreateWorkout() {
       return (
         <>
           {selectedExerciseInputForm()}
-          {exercises["strength"] && (
-            <ExcerciseBoard
-              exercises={exercises["strength"] || []}
-              formTitle="Strength Training"
-            />
-          )}
-          {exercises["cardio"] && (
-            <ExcerciseBoard
-              exercises={exercises["cardio"] || []}
-              formTitle="Cardiovascular Training"
-            />
-          )}
-          {exercises["plyometrics"] && (
-            <ExcerciseBoard
-              exercises={exercises["plyometrics"] || []}
-              formTitle="Plyometric Training"
-            />
-          )}
-          {exercises["stretching"] && (
-            <ExcerciseBoard
-              exercises={exercises["stretching"] || []}
-              formTitle="Stretching Training"
-            />
+          {exercises.length > 0 && (
+            <ExcerciseBoard exercises={exercises} formTitle="Exercises" />
           )}
         </>
       );
@@ -88,15 +62,27 @@ export default function CreateWorkout() {
 
   return (
     <main className="mt-24 flex flex-col items-center">
-      <h2>Create your workout</h2>
-      <select value={selectedExerciseType} onChange={handleExerciseTypeChange}>
-        <option value="">Select an exercise type</option>
-        <option value="strength">Strength Training</option>
-        <option value="cardio">Cardiovascular</option>
-        <option value="plyometrics">Plyometrics</option>
-        <option value="stretching">Stretching</option>
-      </select>
-      {renderExerciseFormAndBoard()}
+      <div className="text-center mb-3">
+        <h2 className="text-4xl mb-2">Create your workout</h2>
+        <p className="text-sm">
+          Select an exercise type, fill out the form, generate exercises and
+          build your program
+        </p>
+      </div>
+      <div className="w-64">
+        <select
+          value={selectedExerciseType}
+          onChange={handleExerciseTypeChange}
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        >
+          <option value="">Select an exercise type</option>
+          <option value="strength">Strength Training</option>
+          <option value="cardio">Cardiovascular</option>
+          <option value="plyometrics">Plyometrics</option>
+          <option value="stretching">Stretching</option>
+        </select>
+        {renderExerciseForm()}
+      </div>  
     </main>
   );
 }
