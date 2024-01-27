@@ -1,4 +1,3 @@
-
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 export async function postForm(formData: any, setExercises: (exercises: Exercise[]) => void) {
@@ -13,7 +12,6 @@ export async function postForm(formData: any, setExercises: (exercises: Exercise
         if (!response.ok) {
             throw new Error("Failed to add generate exercises");
         }
-
         const exerciseList = await response.json();
         setExercises(exerciseList);
     } catch (error) {
