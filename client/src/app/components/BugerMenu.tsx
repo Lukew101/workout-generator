@@ -80,15 +80,12 @@ export default function BurgerMenu() {
             <PersonIcon /><p className="pl-2">My Workouts</p>
           </MenuItem>
         )}
-        {user ? (
-          <MenuItem onClick={() => router.push("/api/auth/logout")}>
+          <MenuItem onClick={() => router.push("http://localhost:8080/logout")}>
             <LogoutIcon /><p className="pl-2">Logout</p>
           </MenuItem>
-        ) : (
-          <MenuItem onClick={() => router.push("/api/auth/login")}>
+          <MenuItem onClick={() => router.push("http://localhost:8080/oauth2/authorization/okta")}>
             <LoginIcon /><p className="pl-2">Login</p>
           </MenuItem>
-        )}
       </Menu>
     </div>
   );
