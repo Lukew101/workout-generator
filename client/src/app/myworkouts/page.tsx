@@ -1,17 +1,30 @@
 "use client";
-import { useUser } from "@auth0/nextjs-auth0/client";
+
+import { useEffect, useState } from "react";
+
 
 export default function ProfileClient() {
-  const { user, error, isLoading } = useUser();
+  const [email, setEmail] = useState<string>("");
+  const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>{error.message}</div>;
+  const fetchAuthStatus= async () => {
+    const res = await fetch(`${BACKEND_URL}/user`, {
+      credentials: "include",
+    });
+    const data = await res.text();
+    setEmail(data);
+    console.log(data);
+  }
+
+  useEffect(() => {
+    fetchAuthStatus();
+  }, [])
+
 
   return (
-    user && (
+    email && (
       <div>
-        <h2>{user.name}</h2>
-        <p>{user.email}</p>
+        <h2 className="mt-20">{email}</h2>
       </div>
     )
   );
