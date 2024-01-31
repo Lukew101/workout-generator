@@ -17,11 +17,14 @@ class CustomAuthenticationSuccessHandler : AuthenticationSuccessHandler {
         authentication: Authentication
     ) {
         val oidcUser = authentication.principal as OidcUser
+        val token = oidcUser.idToken.tokenValue
         response.setHeader("Access-Control-Allow-Credentials", "true")
 
 //        response.addCookie(createNewCookie(oidcUser.getIdToken().getTokenValue()));
-        response.sendRedirect("http://localhost:3000/")
-    } //    private Cookie createNewCookie(String tokenValue) {
+        response.sendRedirect("http://localhost:3000/?token=$token")
+    }
+
+//    private Cookie createNewCookie(String tokenValue) {
     //        Cookie cookie = new Cookie("JwtToken", tokenValue);
     //        cookie.setHttpOnly(true);
     //        cookie.setMaxAge(3500);
