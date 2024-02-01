@@ -14,6 +14,7 @@ import org.springframework.security.config.annotation.web.configurers.CsrfConfig
 
 import java.io.IOException;
 
+
 import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
 
 @Configuration
@@ -31,7 +32,7 @@ public class SecurityConfig {
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(antMatcher("/api/exercise/exerciseList")).permitAll()
+                        .requestMatchers(antMatcher("/api/exercise/exerciseList"), antMatcher("/api/status")).permitAll()
                         .anyRequest().authenticated()
                 )
                 .cors(withWorkoutCreativeDefaults("http://localhost:3000"))
