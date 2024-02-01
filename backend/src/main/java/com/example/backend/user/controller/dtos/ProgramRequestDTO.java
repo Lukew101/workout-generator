@@ -1,6 +1,8 @@
-package com.example.backend.user.controller.dtos
+package com.example.backend.user.controller.dtos;
 
-import com.example.backend.exercise_generator.model.Exercise
+import com.example.backend.exercise_generator.model.Exercise;
 
-@JvmRecord
-data class ProgramRequestDTO(val name: String, val exerciseList: List<Exercise>)
+import java.util.List;
+
+public record ProgramRequestDTO(String name, List<Exercise> exerciseList) {
+}
