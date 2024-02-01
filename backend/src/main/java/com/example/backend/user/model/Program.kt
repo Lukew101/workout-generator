@@ -12,7 +12,7 @@ class Program {
     var name: String = ""
 
     @OneToMany(mappedBy = "program")
-    var exercises: List<Exercise> = ArrayList()
+    var exercises: MutableList<Exercise> = mutableListOf()
 
     @ManyToOne
     @JoinColumn(name = "user_id")
