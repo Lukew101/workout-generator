@@ -4,10 +4,9 @@ spring:
     ansi:
       enabled: always
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-    username: sa
-    password: sa
+    url: jdbc:postgresql://localhost:5432/saltdb
+    username: salt
+    password: secret
   jpa:
     show-sql: true
     defer-datasource-initialization: true
