@@ -1,7 +1,7 @@
 package com.example.backend.exercise_generator.service;
 
-import com.example.backend.exercise_generator.controller.ExerciseAPIResponseDTO;
-import com.example.backend.exercise_generator.controller.ExerciseResponseDTO;
+import com.example.backend.exercise_generator.controller.dtos.ExerciseAPIResponseDTO;
+import com.example.backend.exercise_generator.controller.dtos.ExerciseResponseDTO;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;

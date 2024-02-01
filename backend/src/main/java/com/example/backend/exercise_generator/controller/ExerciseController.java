@@ -1,5 +1,7 @@
 package com.example.backend.exercise_generator.controller;
 
+import com.example.backend.exercise_generator.controller.dtos.ExerciseAPIResponseDTO;
+import com.example.backend.exercise_generator.controller.dtos.ExerciseResponseDTO;
 import com.example.backend.exercise_generator.service.ExerciseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
