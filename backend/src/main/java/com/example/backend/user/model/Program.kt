@@ -4,19 +4,17 @@ import com.example.backend.exercise_generator.model.Exercise
 import jakarta.persistence.*
 
 @Entity
-class ExerciseProgram (
+class Program {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private val id: Long = 0,
+    private val id: Long = 0
 
-    var name: String = "",
+    var name: String = ""
 
-    @ManyToMany
-    @JoinTable(
-        name = "program_exercise",
-        joinColumns = [JoinColumn(name = "program_id")],
-        inverseJoinColumns = [JoinColumn(name = "exercise_id")]
-    )
+    @OneToMany(mappedBy = "program")
     var exercises: List<Exercise> = ArrayList()
-)
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    var user: WorkoutCreativeUser? = null
+}
