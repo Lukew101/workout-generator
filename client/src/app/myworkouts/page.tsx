@@ -1,30 +1,22 @@
 "use client";
 import { useEffect, useState } from "react";
-
-type User = {
-  name: string;
-  email: string;
-  profilePicture: string;
-};
-
+import { User } from "../types";
 
 export default function ProfileClient() {
   const [user, setUser] = useState<User>();
   const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
-  const fetchAuthStatus= async () => {
+  const fetchUserDetails = async () => {
     const res = await fetch(`${BACKEND_URL}/user`, {
       credentials: "include",
     });
     const data = await res.json();
     setUser(data);
-    console.log(data);
   }
 
   useEffect(() => {
-    fetchAuthStatus();
+    fetchUserDetails();
   }, [])
-
 
   return (
     user && (
