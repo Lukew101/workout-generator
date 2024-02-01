@@ -51,12 +51,14 @@ export default function CreateWorkout() {
 
   return (
     <main className="mt-24 flex flex-col items-center">
-      <div className="text-center mb-3">
-        <h2 className="text-5xl mb-2">Create your workout</h2>
-        <p className="text-sm">
-          Select an exercise type, fill out the form, generate exercises and
-          build your program
-        </p>
+      <div className="mb-3 flex flex-col items-center">
+        <h2 className="text-5xl mb-2 text-center ">Create your workout</h2>
+        <ol className="text-base ps-8 my-2 space-y-1 list-decimal list-inside">
+          <li>Select an exercise type + fill out the form</li>
+          <li>Generate exercises</li>
+          <li>Generate your program</li>
+          <li>Save the program</li>
+        </ol>
       </div>
       <div className="w-64">
         <select
