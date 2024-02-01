@@ -21,8 +21,7 @@ class UserController(
 ) {
 
     @GetMapping
-    fun getUser(@AuthenticationPrincipal user: OidcUser?): UserResponseData? {
-        return userService.getUserById(user)
+    fun getUser(@AuthenticationPrincipal user: OidcUser?): UserResponseData {
+        return userService.getUserByEmail(user)
     }
-
 }
