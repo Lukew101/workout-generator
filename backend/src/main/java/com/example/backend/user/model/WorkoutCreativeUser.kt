@@ -12,6 +12,8 @@ class WorkoutCreativeUser {
 
     var name: String = ""
 
+    var profilePicture: String = ""
+
     @OneToMany(mappedBy = "user")
     var programs: List<Program> = ArrayList()
 }
