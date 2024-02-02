@@ -14,6 +14,9 @@ class Exercise {
     var equipment: String? = null
     var difficulty: String? = null
     var instructions: String? = null
+    var sets: Int? = null
+    var reps: Int? = null
+    var duration: Int? = null
 
     @ManyToOne
     @JoinColumn(name = "program_id")
