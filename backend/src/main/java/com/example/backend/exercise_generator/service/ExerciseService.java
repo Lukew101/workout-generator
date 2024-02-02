@@ -23,8 +23,36 @@ public class ExerciseService {
     private String apiKey;
 
     public List<ExerciseAPIResponseDTO> getExerciseList(ExerciseResponseDTO responseDTO) throws IOException, InterruptedException {
-        List<ExerciseAPIResponseDTO> selectedExercises = new ArrayList<>();
         Random random = new Random();
+        List<ExerciseAPIResponseDTO> selectedExercises = new ArrayList<>();
+
+        List<ExerciseAPIResponseDTO> responseExerciseList = getExerciseAPIResponseDTOS(responseDTO);
+
+        int numExercises = switch (responseDTO.duration()) {
+            case 15 -> 2;
+            case 30 -> 4;
+            case 45 -> 5;
+            case 60 -> 6;
+            default -> 0;
+        };
+
+        // Assign reps, sets, times etc.
+        // Ensure these get assigned randomly, but equate to the time.
+
+        if (responseExerciseList.size() < numExercises) {
+            numExercises = responseExerciseList.size();
+        }
+
+        for (int i = 0; i < numExercises; i++) {
+            int randomExerciseIndex = random.nextInt(responseExerciseList.size());
+            ExerciseAPIResponseDTO selectedExercise = responseExerciseList.get(randomExerciseIndex);
+            selectedExercises.add(selectedExercise);
+            responseExerciseList.remove(randomExerciseIndex);
+        }
+        return selectedExercises;
+    }
+
+    private List<ExerciseAPIResponseDTO> getExerciseAPIResponseDTOS(ExerciseResponseDTO responseDTO) throws IOException, InterruptedException {
         String apiUri = "https://exercises-by-api-ninjas.p.rapidapi.com/v1/exercises?type=" + responseDTO.type() + "&muscle=" + responseDTO.muscle() + "&difficulty=" + responseDTO.difficulty();
 
         if (responseDTO.muscle() == null) {
@@ -50,28 +78,6 @@ public class ExerciseService {
                 responseBody,
                 new TypeReference<List<ExerciseAPIResponseDTO>>() {
                 });
-
-        int numExercises = switch (responseDTO.duration()) {
-            case 15 -> 2;
-            case 30 -> 4;
-            case 45 -> 5;
-            case 60 -> 6;
-            default -> 0;
-        };
-
-        // Assign reps, sets, times etc.
-        // Ensure these get assigned randomly, but equate to the time.
-
-        if (responseExerciseList.size() < numExercises) {
-            numExercises = responseExerciseList.size();
-        }
-
-        for (int i = 0; i < numExercises; i++) {
-            int randomExerciseIndex = random.nextInt(responseExerciseList.size());
-            ExerciseAPIResponseDTO selectedExercise = responseExerciseList.get(randomExerciseIndex);
-            selectedExercises.add(selectedExercise);
-            responseExerciseList.remove(randomExerciseIndex);
-        }
-        return selectedExercises;
+        return responseExerciseList;
     }
 }
