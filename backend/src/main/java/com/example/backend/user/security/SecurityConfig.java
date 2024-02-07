@@ -47,8 +47,8 @@ public class SecurityConfig {
     private LogoutHandler logoutHandler() {
         return (request, response, authentication) -> {
             try {
-                String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
-                response.sendRedirect(issuer + "v2/logout?client_id=" + clientId + "&returnTo=" + baseUrl);
+                String frontendUrl = "http://localhost:3000/";
+                response.sendRedirect(issuer + "v2/logout?client_id=" + clientId + "&returnTo=" + frontendUrl);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
