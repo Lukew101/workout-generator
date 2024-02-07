@@ -14,7 +14,7 @@ interface AddEntityFormProps {
 const StrengthTrainingInputForm = ({ setExercises }: AddEntityFormProps) => {
   const [formData, setFormData] = useState({
     duration: "15",
-    type: "stretching",
+    type: "strength",
     muscle: "abdominals",
     difficulty: "beginner",
   });
