@@ -35,20 +35,8 @@ class CustomAuthenticationSuccessHandler(
             userRepository.save(newUser)
         }
 
-        val token = oidcUser.idToken.tokenValue
         response.setHeader("Access-Control-Allow-Credentials", "true")
 
-//        response.addCookie(createNewCookie(oidcUser.getIdToken().getTokenValue()));
-        response.sendRedirect("http://localhost:3000/?token=$token")
+        response.sendRedirect("http://localhost:3000/myworkouts")
     }
-
-//    private Cookie createNewCookie(String tokenValue) {
-    //        Cookie cookie = new Cookie("JwtToken", tokenValue);
-    //        cookie.setHttpOnly(true);
-    //        cookie.setMaxAge(3500);
-    //        cookie.setSecure(true);
-    //        cookie.setPath("/");
-    //        cookie.setDomain(getDomain(websiteProperties.frontend()));
-    //        return cookie;
-    //    }
 }
