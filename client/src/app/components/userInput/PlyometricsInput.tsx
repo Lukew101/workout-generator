@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { postForm } from "../../functions/httpFunctions";
+import { fetchExerciseList } from "../../functions/httpFunctions";
 import * as React from "react";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -35,7 +35,7 @@ const PlyometricsInputForm = ({ setExercises }: AddEntityFormProps) => {
 
   const handleFormSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    postForm(formData, setExercises);
+    fetchExerciseList("plyometrics", formData, setExercises);
   };
 
   return (

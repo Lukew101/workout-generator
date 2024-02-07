@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { postForm } from "../../functions/httpFunctions";
 import * as React from "react";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import GenerateButton from "./GenerateButton";
+import { fetchExerciseList } from "@/app/functions/httpFunctions";
 
 interface AddEntityFormProps {
   setExercises: (exercises: Exercise[]) => void;
@@ -42,7 +42,7 @@ const StretchingInputForm = ({ setExercises }: AddEntityFormProps) => {
 
   const handleFormSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    postForm(formData, setExercises);
+    fetchExerciseList("stretching", formData, setExercises);
   };
 
   return (

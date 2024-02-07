@@ -1,8 +1,8 @@
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
-export async function postForm(formData: any, setExercises: (exercises: Exercise[]) => void) {
+export async function fetchExerciseList(exerciseType: string, formData: any, setExercises: (exercises: Exercise[]) => void) {
     try {
-        const response = await fetch(`${BACKEND_URL}/exercise/exerciseList`, {
+        const response = await fetch(`${BACKEND_URL}/exercise/${exerciseType}`, {
             method: "POST",
             body: JSON.stringify(formData),
             headers: {
