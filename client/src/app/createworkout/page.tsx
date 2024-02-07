@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import StrengthTrainingInputForm from "../components/userInput/StrengthTrainingInput";
 import ExcerciseBoard from "../components/ExerciseBoard";
 import CardioInputForm from "../components/userInput/CardioTrainingInput";
@@ -74,9 +74,7 @@ export default function CreateWorkout() {
         </select>
         {renderExerciseForm()}
       </div>
-      {exercises.length > 0 && (
-        <ExcerciseBoard exercises={exercises} />
-      )}
+      {exercises.length > 0 && <ExcerciseBoard exercises={exercises} />}
     </main>
   );
 }

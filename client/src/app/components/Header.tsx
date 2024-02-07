@@ -2,28 +2,19 @@
 import Link from "next/link";
 import BurgerMenu from "./BugerMenu";
 import { useCookies } from "react-cookie";
-import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { User } from "../types";
-
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
+import { jwtDecode } from "jwt-decode";
 
 export default function Header() {
   const [cookies, setCookie, removeCookie] = useCookies(["JwtToken"]);
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    if (cookies.JwtToken) {
-      const fetchUserDetails = async () => {
-        const res = await fetch(`${BACKEND_URL}/user`, {
-          credentials: "include",
-        });
-
-        const data = await res.json();
-        setUser(data);
-      };
-
-      fetchUserDetails();
+    if (cookies.JwtToken && user == null) {
+      const userToken: string = cookies.JwtToken;
+      const user: User = jwtDecode(userToken);
+      setUser(user);
     }
   }, [cookies.JwtToken]);
 
