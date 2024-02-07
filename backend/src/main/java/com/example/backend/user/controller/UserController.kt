@@ -6,6 +6,9 @@ import com.example.backend.user.controller.dtos.UserResponseData
 import com.example.backend.user.model.Program
 import com.example.backend.user.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpHeaders
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.security.oauth2.core.oidc.user.OidcUser
 import org.springframework.web.bind.annotation.CrossOrigin
@@ -25,8 +28,15 @@ class UserController(
 ) {
 
     @GetMapping
-    fun getUser(@AuthenticationPrincipal user: OidcUser?): UserResponseData {
-        return userService.getUserByEmail(user)
+    fun getUser(@AuthenticationPrincipal user: OidcUser?): ResponseEntity<UserResponseData> {
+        val userData = userService.getUserByEmail(user)
+        val idToken = user?.idToken?.tokenValue
+
+        val headers = HttpHeaders()
+        headers.add("IdToken", idToken)
+        headers.accessControlExposeHeaders = listOf("IdToken")
+
+        return ResponseEntity(userData, headers, HttpStatus.OK)
     }
 
     @PostMapping("/program")
