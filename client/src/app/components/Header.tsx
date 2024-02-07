@@ -10,40 +10,22 @@ const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 export default function Header() {
   const [cookies, setCookie, removeCookie] = useCookies(["JwtToken"]);
-  const searchParams = useSearchParams();
-  const token = searchParams.get("token");
-  const router = useRouter();
-
   const [user, setUser] = useState<User | null>(null);
 
-  const fetchUserDetails = async () => {
-    const res = await fetch(`${BACKEND_URL}/user`, {
-      credentials: "include",
-    });
-    const data = await res.json();
-    setUser(data);
-  }
-
   useEffect(() => {
-    fetchUserDetails();
-  }, [])
+    if (cookies.JwtToken) {
+      const fetchUserDetails = async () => {
+        const res = await fetch(`${BACKEND_URL}/user`, {
+          credentials: "include",
+        });
 
-  useEffect(() => {
-    if (token) {
-      const tokenString = Array.isArray(token) ? token[0] : token;
-      const expirationDate = new Date();
-      expirationDate.setTime(expirationDate.getTime() + 2 * 60 * 60 * 1000);
-      setCookie("JwtToken", tokenString, {
-        path: "/",
-        sameSite: "none",
-        secure: true,
-        expires: expirationDate,
-      });
-      setTimeout(() => {
-        router.push("/");
-      }, 50)
+        const data = await res.json();
+        setUser(data);
+      };
+
+      fetchUserDetails();
     }
-  }, [token]);
+  }, [cookies.JwtToken]);
 
   return (
     <header className="bg-background h-16 w-full flex justify-between fixed top-0 z-10">

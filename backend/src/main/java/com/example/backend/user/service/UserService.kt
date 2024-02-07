@@ -1,7 +1,6 @@
 package com.example.backend.user.service
 
 import com.example.backend.exceptionHandler.exception.UserNotFoundException
-import com.example.backend.exercise_generator.model.Exercise
 import com.example.backend.user.controller.dtos.ProgramRequestDTO
 import com.example.backend.user.controller.dtos.UserResponseData
 import com.example.backend.user.model.Program
