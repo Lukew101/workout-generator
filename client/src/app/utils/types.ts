@@ -1,4 +1,4 @@
-export type Exercise = {
+export interface Exercise  {
   name: string;
   type: string;
   muscle: string;
@@ -13,7 +13,7 @@ export type User = {
   picture: string;
 };
 
-export type StrengthExercise = {
+export interface StrengthExercise extends Exercise {
   name: string;
   type: string;
   muscle: string;
@@ -24,7 +24,7 @@ export type StrengthExercise = {
   sets: number;
 }
 
-export type PlyometricExercise = {
+export interface PlyometricExercise extends Exercise {
   name: string;
   type: string;
   muscle: string;
@@ -35,7 +35,7 @@ export type PlyometricExercise = {
   sets: number;
 }
 
-export type StretchingExercise = {
+export interface StretchingExercise extends Exercise {
   name: string;
   type: string;
   muscle: string;
@@ -46,7 +46,7 @@ export type StretchingExercise = {
   sets: number;
 }
 
-export type CardioExercise = {
+export interface CardioExercise extends Exercise {
   name: string;
   type: string;
   muscle: string;
@@ -56,3 +56,10 @@ export type CardioExercise = {
   duration: number;
   sets: number;
 }
+
+export type FormData = {
+  duration: string;
+  type: string;
+  muscle: string;
+  difficulty: string;
+};
