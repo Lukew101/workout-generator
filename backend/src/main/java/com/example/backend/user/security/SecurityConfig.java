@@ -33,7 +33,7 @@ public class SecurityConfig {
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(antMatcher("/api/exercise/exerciseList"), antMatcher("/api/status")).permitAll()
+                        .requestMatchers(antMatcher("/api/exercise/**"), antMatcher("/api/status")).permitAll()
                         .anyRequest().authenticated()
                 )
                 .cors(withWorkoutCreativeDefaults("http://localhost:3000"))
