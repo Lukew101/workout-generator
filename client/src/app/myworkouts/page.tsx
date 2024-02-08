@@ -9,7 +9,7 @@ export default function ProfileClient() {
   const [user, setUser] = useState<User>();
   const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
-  const fetchUser= async () => {
+  const fetchUser = async () => {
     const cookieExpiration = new Date();
     cookieExpiration.setHours(cookieExpiration.getHours() + 8);
 
@@ -25,9 +25,6 @@ export default function ProfileClient() {
       secure: true,
       expires: cookieExpiration,
     });
-
-    const data = await res.json();
-    setUser(data);
   };
 
   useEffect(() => {
