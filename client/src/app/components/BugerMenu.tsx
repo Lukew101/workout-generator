@@ -11,8 +11,8 @@ import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import LogoutIcon from "@mui/icons-material/Logout";
 import PersonIcon from "@mui/icons-material/Person";
 import LoginIcon from "@mui/icons-material/Login";
-import { User } from "../types";
 import { useCookies } from "react-cookie";
+import { User } from "../utils/types";
 
 type BugerMenuProps = {
   user: User | null;
