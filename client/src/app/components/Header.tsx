@@ -3,8 +3,8 @@ import Link from "next/link";
 import BurgerMenu from "./BugerMenu";
 import { useCookies } from "react-cookie";
 import { useEffect, useState } from "react";
-import { User } from "../types";
 import { jwtDecode } from "jwt-decode";
+import { User } from "../utils/types";
 
 export default function Header() {
   const [cookies, setCookie, removeCookie] = useCookies(["JwtToken"]);
