@@ -1,4 +1,4 @@
-type Exercise = {
+export type Exercise = {
   name: string;
   type: string;
   muscle: string;
@@ -7,11 +7,52 @@ type Exercise = {
   instructions: string;
 };
 
-type ResponseExerciseList = {
-  exerciseList: Exercise[];
+export type User = {
+  name: string;
+  email: string;
+  picture: string;
 };
 
-type ExerciseListWithType = {
+export type StrengthExercise = {
+  name: string;
   type: string;
-  exerciseList: Exercise[];
-};
+  muscle: string;
+  equipment: string;
+  difficulty: string;
+  instructions: string;
+  reps: number;
+  sets: number;
+}
+
+export type PlyometricExercise = {
+  name: string;
+  type: string;
+  muscle: string;
+  equipment: string;
+  difficulty: string;
+  instructions: string;
+  reps: number;
+  sets: number;
+}
+
+export type StretchingExercise = {
+  name: string;
+  type: string;
+  muscle: string;
+  equipment: string;
+  difficulty: string;
+  instructions: string;
+  duration: number;
+  sets: number;
+}
+
+export type CardioExercise = {
+  name: string;
+  type: string;
+  muscle: string;
+  equipment: string;
+  difficulty: string;
+  instructions: string;
+  duration: number;
+  sets: number;
+}
