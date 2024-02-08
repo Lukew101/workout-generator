@@ -1,6 +1,6 @@
 package com.example.backend.exercise_generator.service;
 
-import com.example.backend.exercise_generator.controller.dtos.ExerciseResponseDTO;
+import com.example.backend.exercise_generator.controller.dtos.ExerciseRequestDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +28,9 @@ class ExerciseServiceTest {
     @Test
     void shouldReturnExerciseList() throws Exception {
         String uri = "http://localhost:" + port + "/api/exercise/exerciseList";
-        ExerciseResponseDTO exerciseResponseDTO = new ExerciseResponseDTO(15, "cardio", null, "beginner");
+        ExerciseRequestDTO exerciseRequestDTO = new ExerciseRequestDTO(15, "cardio", null, "beginner");
 
-        String exerciseJson = objectMapper.writeValueAsString(exerciseResponseDTO);
+        String exerciseJson = objectMapper.writeValueAsString(exerciseRequestDTO);
 
         mockMvc.perform(MockMvcRequestBuilders.post(uri)
                         .contentType(MediaType.APPLICATION_JSON)
