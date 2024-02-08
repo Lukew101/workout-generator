@@ -6,12 +6,13 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import GenerateButton from "./GenerateButton";
+import { Exercise } from "@/app/utils/types";
 
 interface AddEntityFormProps {
-  setExercises: (exercises: Exercise[]) => void;
+  setStrengthExercises: (exercises: Exercise[]) => void;
 }
 
-const StrengthTrainingInputForm = ({ setExercises }: AddEntityFormProps) => {
+const StrengthTrainingInputForm = ({ setStrengthExercises }: AddEntityFormProps) => {
   const [formData, setFormData] = useState({
     duration: "15",
     type: "strength",
@@ -42,7 +43,7 @@ const StrengthTrainingInputForm = ({ setExercises }: AddEntityFormProps) => {
 
   const handleFormSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    fetchExerciseList("strength", formData, setExercises);
+    fetchExerciseList("strength", formData, setStrengthExercises);
   };
 
   return (

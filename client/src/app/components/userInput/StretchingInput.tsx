@@ -6,12 +6,13 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import GenerateButton from "./GenerateButton";
 import { fetchExerciseList } from "@/app/functions/httpFunctions";
+import { Exercise, StretchingExercise } from "@/app/utils/types";
 
 interface AddEntityFormProps {
-  setExercises: (exercises: Exercise[]) => void;
+  setStretchingExercises: (exercises: Exercise[]) => void;
 }
 
-const StretchingInputForm = ({ setExercises }: AddEntityFormProps) => {
+const StretchingInputForm = ({ setStretchingExercises }: AddEntityFormProps) => {
   const [formData, setFormData] = useState({
     duration: "15",
     type: "stretching",
@@ -42,7 +43,9 @@ const StretchingInputForm = ({ setExercises }: AddEntityFormProps) => {
 
   const handleFormSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    fetchExerciseList("stretching", formData, setExercises);
+    fetchExerciseList("stretching", formData, (exercises: Exercise[]) => {
+      setStretchingExercises(exercises as StretchingExercise[]);
+  });
   };
 
   return (

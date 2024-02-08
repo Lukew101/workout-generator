@@ -6,12 +6,13 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import GenerateButton from "./GenerateButton";
+import { Exercise } from "@/app/utils/types";
 
 interface AddEntityFormProps {
-  setExercises: (exercises: Exercise[]) => void;
+  setPlyometricExercises: (exercises: Exercise[]) => void;
 }
 
-const PlyometricsInputForm = ({ setExercises }: AddEntityFormProps) => {
+const PlyometricsInputForm = ({ setPlyometricExercises }: AddEntityFormProps) => {
   const [formData, setFormData] = useState({
     duration: "15",
     type: "plyometrics",
@@ -35,7 +36,7 @@ const PlyometricsInputForm = ({ setExercises }: AddEntityFormProps) => {
 
   const handleFormSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    fetchExerciseList("plyometrics", formData, setExercises);
+    fetchExerciseList("plyometrics", formData, setPlyometricExercises);
   };
 
   return (
