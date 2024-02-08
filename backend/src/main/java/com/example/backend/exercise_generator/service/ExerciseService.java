@@ -1,7 +1,6 @@
 package com.example.backend.exercise_generator.service;
 
-import com.example.backend.exercise_generator.controller.dtos.ExerciseAPIResponseDTO;
-import com.example.backend.exercise_generator.controller.dtos.ExerciseResponseDTO;
+import com.example.backend.exercise_generator.controller.dtos.*;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,8 +21,37 @@ public class ExerciseService {
     @Value("${API_KEY}")
     private String apiKey;
 
-    public List<ExerciseAPIResponseDTO> getExerciseList(ExerciseResponseDTO responseDTO) throws IOException, InterruptedException {
-        Random random = new Random();
+    private final Random random = new Random();
+
+    public List<StrengthExerciseResponseDTO> getStrengthExercises(ExerciseRequestDTO exerciseRequestDTO) throws IOException, InterruptedException {
+        List<ExerciseAPIResponseDTO> responseExerciseList = getExerciseList(exerciseRequestDTO);
+        return responseExerciseList.stream()
+                .map(exercise -> new StrengthExerciseResponseDTO(exercise.name(), exercise.type(), exercise.muscle(), exercise.equipment(), exercise.difficulty(), exercise.instructions(), 3, 12))
+                .toList();
+    }
+
+    public List<PlyometricExerciseResponseDTO> getPlyometricExercises(ExerciseRequestDTO exerciseRequestDTO) throws IOException, InterruptedException {
+        List<ExerciseAPIResponseDTO> responseExerciseList = getExerciseList(exerciseRequestDTO);
+        return responseExerciseList.stream()
+                .map(exercise -> new PlyometricExerciseResponseDTO(exercise.name(), exercise.type(), exercise.equipment(), exercise.difficulty(), exercise.instructions(), 3, 12))
+                .toList();
+    }
+
+    public List<StretchingExerciseResponseDTO> getStretchingExercises(ExerciseRequestDTO exerciseRequestDTO) throws IOException, InterruptedException {
+        List<ExerciseAPIResponseDTO> responseExerciseList = getExerciseList(exerciseRequestDTO);
+        return responseExerciseList.stream()
+                .map(exercise -> new StretchingExerciseResponseDTO(exercise.name(), exercise.type(), exercise.muscle(), exercise.equipment(), exercise.difficulty(), exercise.instructions(), 3, 30))
+                .toList();
+    }
+
+    public List<CardioExerciseResponseDTO> getCardioExercises(ExerciseRequestDTO exerciseRequestDTO) throws IOException, InterruptedException {
+        List<ExerciseAPIResponseDTO> responseExerciseList = getExerciseList(exerciseRequestDTO);
+        return responseExerciseList.stream()
+                .map(exercise -> new CardioExerciseResponseDTO(exercise.name(), exercise.type(), exercise.equipment(), exercise.difficulty(), exercise.instructions(), 1, 15))
+                .toList();
+    }
+
+    private List<ExerciseAPIResponseDTO> getExerciseList(ExerciseRequestDTO responseDTO) throws IOException, InterruptedException {
         List<ExerciseAPIResponseDTO> selectedExercises = new ArrayList<>();
 
         List<ExerciseAPIResponseDTO> responseExerciseList = getExerciseAPIResponseDTOS(responseDTO);
@@ -35,9 +63,6 @@ public class ExerciseService {
             case 60 -> 6;
             default -> 0;
         };
-
-        // Assign reps, sets, times etc.
-        // Ensure these get assigned randomly, but equate to the time.
 
         if (responseExerciseList.size() < numExercises) {
             numExercises = responseExerciseList.size();
@@ -52,7 +77,7 @@ public class ExerciseService {
         return selectedExercises;
     }
 
-    private List<ExerciseAPIResponseDTO> getExerciseAPIResponseDTOS(ExerciseResponseDTO responseDTO) throws IOException, InterruptedException {
+    private List<ExerciseAPIResponseDTO> getExerciseAPIResponseDTOS(ExerciseRequestDTO responseDTO) throws IOException, InterruptedException {
         String apiUri = "https://exercises-by-api-ninjas.p.rapidapi.com/v1/exercises?type=" + responseDTO.type() + "&muscle=" + responseDTO.muscle() + "&difficulty=" + responseDTO.difficulty();
 
         if (responseDTO.muscle() == null) {
@@ -74,10 +99,9 @@ public class ExerciseService {
 
         ObjectMapper objectMapper = new ObjectMapper();
 
-        List<ExerciseAPIResponseDTO> responseExerciseList = objectMapper.readValue(
+        return objectMapper.readValue(
                 responseBody,
                 new TypeReference<List<ExerciseAPIResponseDTO>>() {
                 });
-        return responseExerciseList;
     }
 }
