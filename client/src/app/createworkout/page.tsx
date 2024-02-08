@@ -1,14 +1,29 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import StrengthTrainingInputForm from "../components/userInput/StrengthTrainingInput";
-import ExcerciseBoard from "../components/ExerciseBoard";
 import CardioInputForm from "../components/userInput/CardioTrainingInput";
 import PlyometricsInputForm from "../components/userInput/PlyometricsInput";
 import StretchingInputForm from "../components/userInput/StretchingInput";
+import {
+  CardioExercise,
+  PlyometricExercise,
+  StrengthExercise,
+  StretchingExercise,
+} from "../utils/types";
+import ExerciseBoard from "../components/ExerciseBoard";
 
 export default function CreateWorkout() {
   const [selectedExerciseType, setSelectedExerciseType] = useState("");
-  const [exercises, setExercises] = useState<Exercise[]>([]);
+  const [strengthExercises, setStrengthExercises] = useState<
+    StrengthExercise[]
+  >([]);
+  const [stretchingExercises, setstretchingExercises] = useState<
+    StretchingExercise[]
+  >([]);
+  const [plyometricExercises, setPlyometricExercises] = useState<
+    PlyometricExercise[]
+  >([]);
+  const [cardioExercises, setCardioExercises] = useState<CardioExercise[]>([]);
 
   const handleExerciseTypeChange = (
     event: React.ChangeEvent<HTMLSelectElement>
@@ -16,8 +31,40 @@ export default function CreateWorkout() {
     setSelectedExerciseType(event.target.value);
   };
 
-  const handleGenerateExerciseSet = (generatedExercises: Exercise[]) => {
-    setExercises((prevExercises) => [...prevExercises, ...generatedExercises]);
+  const handleGenerateStretchingExercises = (
+    generatedExercises: StretchingExercise[]
+  ) => {
+    setstretchingExercises((prevExercises) => [
+      ...prevExercises,
+      ...generatedExercises,
+    ]);
+  };
+
+  const handleGenerateStrengthExercises = (
+    generatedExercises: StrengthExercise[]
+  ) => {
+    setStrengthExercises((prevExercises) => [
+      ...prevExercises,
+      ...generatedExercises,
+    ]);
+  };
+
+  const handleGeneratePlyometricExercises = (
+    generatedExercises: PlyometricExercise[]
+  ) => {
+    setPlyometricExercises((prevExercises) => [
+      ...prevExercises,
+      ...generatedExercises,
+    ]);
+  };
+
+  const handleGenerateCardioExercises = (
+    generatedExercises: CardioExercise[]
+  ) => {
+    setCardioExercises((prevExercises) => [
+      ...prevExercises,
+      ...generatedExercises,
+    ]);
   };
 
   const renderExerciseForm = () => {
@@ -27,18 +74,24 @@ export default function CreateWorkout() {
           case "strength":
             return (
               <StrengthTrainingInputForm
-                setExercises={handleGenerateExerciseSet}
+                setExercises={handleGenerateStrengthExercises}
               />
             );
           case "cardio":
-            return <CardioInputForm setExercises={handleGenerateExerciseSet} />;
+            return (
+              <CardioInputForm setExercises={handleGenerateCardioExercises} />
+            );
           case "plyometrics":
             return (
-              <PlyometricsInputForm setExercises={handleGenerateExerciseSet} />
+              <PlyometricsInputForm
+                setExercises={handleGeneratePlyometricExercises}
+              />
             );
           case "stretching":
             return (
-              <StretchingInputForm setExercises={handleGenerateExerciseSet} />
+              <StretchingInputForm
+                setExercises={handleGenerateStretchingExercises}
+              />
             );
           default:
             return null;
@@ -48,6 +101,12 @@ export default function CreateWorkout() {
     }
     return null;
   };
+
+  const hasExercises =
+    strengthExercises.length > 0 ||
+    cardioExercises.length > 0 ||
+    plyometricExercises.length > 0 ||
+    stretchingExercises.length > 0;
 
   return (
     <main className="mt-24 flex flex-col items-center">
@@ -74,7 +133,14 @@ export default function CreateWorkout() {
         </select>
         {renderExerciseForm()}
       </div>
-      {exercises.length > 0 && <ExcerciseBoard exercises={exercises} />}
+      {hasExercises && (
+        <ExerciseBoard
+          strengthExercises={strengthExercises}
+          cardioExercises={cardioExercises}
+          plyometricExercises={plyometricExercises}
+          stretchingExercises={stretchingExercises}
+        />
+      )}
     </main>
   );
 }
