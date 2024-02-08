@@ -1,8 +1,8 @@
-import { Exercise } from '../utils/types'; 
+import { Exercise, FormData } from '../utils/types'; 
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
-export async function fetchExerciseList(exerciseType: string, formData: any, setExercises: (exercises: Exercise[]) => void) {
+export async function fetchExerciseList(exerciseType: string, formData: FormData, setExercises: (exercises: Exercise[]) => void) {
     try {
         const response = await fetch(`${BACKEND_URL}/exercise/${exerciseType}`, {
             method: "POST",

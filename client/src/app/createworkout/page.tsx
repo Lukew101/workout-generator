@@ -6,6 +6,7 @@ import PlyometricsInputForm from "../components/userInput/PlyometricsInput";
 import StretchingInputForm from "../components/userInput/StretchingInput";
 import {
   CardioExercise,
+  Exercise,
   PlyometricExercise,
   StrengthExercise,
   StretchingExercise,
@@ -31,39 +32,36 @@ export default function CreateWorkout() {
     setSelectedExerciseType(event.target.value);
   };
 
-  const handleGenerateStretchingExercises = (
-    generatedExercises: StretchingExercise[]
-  ) => {
+  const handleGenerateStretchingExercises = (generatedExercises: Exercise[]) => {
+    const stretchingExercises = generatedExercises as StretchingExercise[];
     setstretchingExercises((prevExercises) => [
       ...prevExercises,
-      ...generatedExercises,
+      ...stretchingExercises,
     ]);
   };
+  
 
-  const handleGenerateStrengthExercises = (
-    generatedExercises: StrengthExercise[]
-  ) => {
+  const handleGenerateStrengthExercises = async (generatedExercises: Exercise[]) => {
+    const strengthExercises = generatedExercises as StrengthExercise[];
     setStrengthExercises((prevExercises) => [
       ...prevExercises,
-      ...generatedExercises,
+      ...strengthExercises,
     ]);
   };
 
-  const handleGeneratePlyometricExercises = (
-    generatedExercises: PlyometricExercise[]
-  ) => {
+  const handleGeneratePlyometricExercises = async (generatedExercises: Exercise[]) => {
+    const plyometricExercises = generatedExercises as PlyometricExercise[];
     setPlyometricExercises((prevExercises) => [
       ...prevExercises,
-      ...generatedExercises,
+      ...plyometricExercises,
     ]);
   };
 
-  const handleGenerateCardioExercises = (
-    generatedExercises: CardioExercise[]
-  ) => {
+  const handleGenerateCardioExercises = async (generatedExercises: Exercise[]) => {
+    const cardioExercises = generatedExercises as CardioExercise[];
     setCardioExercises((prevExercises) => [
       ...prevExercises,
-      ...generatedExercises,
+      ...cardioExercises,
     ]);
   };
 
@@ -74,23 +72,23 @@ export default function CreateWorkout() {
           case "strength":
             return (
               <StrengthTrainingInputForm
-                setExercises={handleGenerateStrengthExercises}
+                setStrengthExercises={handleGenerateStrengthExercises}
               />
             );
           case "cardio":
             return (
-              <CardioInputForm setExercises={handleGenerateCardioExercises} />
+              <CardioInputForm setCardioExercises={handleGenerateCardioExercises} />
             );
           case "plyometrics":
             return (
               <PlyometricsInputForm
-                setExercises={handleGeneratePlyometricExercises}
+                setPlyometricExercises={handleGeneratePlyometricExercises}
               />
             );
           case "stretching":
             return (
               <StretchingInputForm
-                setExercises={handleGenerateStretchingExercises}
+                setStretchingExercises={handleGenerateStretchingExercises}
               />
             );
           default:
