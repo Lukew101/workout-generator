@@ -1,8 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
-import { User } from "../types";
 import { useCookies } from "react-cookie";
 import { jwtDecode } from "jwt-decode";
+import { User } from "../utils/types";
 
 export default function ProfileClient() {
   const [cookies, setCookie, removeCookie] = useCookies(["JwtToken"]);

@@ -6,6 +6,7 @@ import {
   StretchingExercise,
 } from "../utils/types";
 import ExerciseCard from "./ExerciseCard";
+import { useCookies } from "react-cookie";
 
 type ExerciseBoardProps = {
   strengthExercises: StrengthExercise[];
@@ -21,15 +22,32 @@ const ExerciseBoard = ({
   stretchingExercises,
 }: ExerciseBoardProps) => {
   const [showExercises, setShowExercises] = useState(true);
+  const [cookies, setCookie, removeCookie] = useCookies(["JwtToken"]);
 
-  useEffect(() => {
-    console.log(
-      strengthExercises,
-      cardioExercises,
-      plyometricExercises,
-      stretchingExercises
-    );
-  }, []);
+  const handleSaveProgram = async () => {
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/program`, {
+        method: "POST",
+        body: JSON.stringify({
+          "name": "My Program",
+          strengthExercises,
+          cardioExercises,
+          plyometricExercises,
+          stretchingExercises
+        }),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${cookies.JwtToken}`,
+        },
+      });
+      if (!response.ok) {
+        throw new Error("Failed to save program");
+      }
+      console.log("Program saved successfully");
+    } catch (error) {
+      console.error("Error while saving the program:", error);
+    }
+  }
 
   const handleBuildProgramClick = () => {
     setShowExercises(false);
@@ -62,7 +80,15 @@ const ExerciseBoard = ({
           </button>
         </>
       ) : (
-        <h2>Your Program</h2>
+        <>
+          <h2>Your Program</h2>
+          <button
+            onClick={handleSaveProgram}
+            className="max-w-44 text-white bg-accent hover:bg-accentDark focus:ring-4 focus:ring-accentLight font-medium rounded-lg text-lg px-5 py-2.5 me-2 mt-6"
+          >
+            Save Program
+          </button>
+        </>
       )}
     </div>
   );
