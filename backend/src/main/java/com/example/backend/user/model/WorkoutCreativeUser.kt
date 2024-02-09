@@ -1,5 +1,6 @@
 package com.example.backend.user.model
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
 
 @Entity
@@ -15,5 +16,6 @@ class WorkoutCreativeUser {
     var profilePicture: String = ""
 
     @OneToMany(mappedBy = "user")
-    var programs: List<Program> = ArrayList()
+    @JsonIgnore
+    var programs: MutableList<Program> = mutableListOf()
 }
