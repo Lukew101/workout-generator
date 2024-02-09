@@ -6,11 +6,13 @@ import com.example.backend.user.controller.dtos.UserResponseData
 import com.example.backend.user.model.Program
 import org.springframework.security.access.AccessDeniedException
 import org.springframework.security.oauth2.core.oidc.user.OidcUser
+import org.springframework.security.oauth2.jwt.Jwt
 import org.springframework.stereotype.Service
 
 @Service
 class UserService(
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val programRepository: ProgramRepository
 ) {
     fun getUserByEmail(user: OidcUser?): UserResponseData {
         val email = user?.email ?: throw AccessDeniedException("User not authenticated")
@@ -25,16 +27,36 @@ class UserService(
         )
     }
 
-    fun createProgram(programData: ProgramRequestDTO, user: OidcUser): Program {
+    fun createProgram(programData: ProgramRequestDTO, jwt: Jwt): Program {
         val program = Program()
+        val userEmail = jwt.getClaimAsString("email")
+
         program.name = programData.name
 
-        programData.exerciseList.forEach { exercise ->
-            program.exercises.add(exercise)
+        programData.strengthExercises.forEach { exercise ->
+            exercise.program = program
+            program.strengthExercises.add(exercise)
         }
 
-        program.user = userRepository.findByEmail(user.email)
+        programData.cardioExercises.forEach { exercise ->
+            exercise.program = program
+            program.cardioExercises.add(exercise)
+        }
+
+        programData.stretchingExercises.forEach { exercise ->
+            exercise.program = program
+            program.stretchingExercises.add(exercise)
+        }
+
+        programData.plyometricExercises.forEach { exercise ->
+            exercise.program = program
+            program.plyometricExercises.add(exercise)
+        }
+
+        program.user = userRepository.findByEmail(userEmail)
             ?: throw UserNotFoundException("User not found")
+
+        programRepository.save(program)
 
         return program
     }
