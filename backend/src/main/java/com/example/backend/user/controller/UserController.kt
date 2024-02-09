@@ -1,6 +1,5 @@
 package com.example.backend.user.controller
 
-import com.example.backend.exercise_generator.model.Exercise
 import com.example.backend.user.controller.dtos.ProgramRequestDTO
 import com.example.backend.user.controller.dtos.UserResponseData
 import com.example.backend.user.model.Program
@@ -11,7 +10,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.security.oauth2.core.oidc.user.OidcUser
-import org.springframework.web.bind.annotation.CrossOrigin
+import org.springframework.security.oauth2.jwt.Jwt
 
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
@@ -40,7 +39,7 @@ class UserController(
     }
 
     @PostMapping("/program")
-    fun createProgram(@AuthenticationPrincipal user: OidcUser, @RequestBody programData: ProgramRequestDTO): Program {
-        return userService.createProgram(programData, user)
+    fun createProgram(@AuthenticationPrincipal jwt: Jwt, @RequestBody programData: ProgramRequestDTO): Program {
+        return userService.createProgram(programData, jwt)
     }
 }
