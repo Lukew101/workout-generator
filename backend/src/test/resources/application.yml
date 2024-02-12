@@ -1,4 +1,6 @@
-## DB config goes here
+debug: true
+server:
+  port: 9999
 spring:
   datasource:
     driver-class-name: org.h2.Driver
@@ -13,19 +15,8 @@ spring:
     defer-datasource-initialization: true
     hibernate:
       ddl-auto: create-drop
-#  security:
-#    oauth2:
-#      resourceserver:
-#        jwt:
-#          issuer-uri: ${ISSUER_URI}
-#          Use if frontend is used with react with Auth0Provider
 okta:
   oauth2:
     issuer: ${ISSUER_URI}
     client-id: ${CLIENT_ID}
     client-secret: ${CLIENT_SECRET}
-logging:
-  level:
-    org:
-      springframework:
-        security: TRACE

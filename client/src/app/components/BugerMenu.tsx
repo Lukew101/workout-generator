@@ -8,22 +8,32 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import { useState } from "react";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
-import { useUser } from "@auth0/nextjs-auth0/client";
-import LogoutIcon from '@mui/icons-material/Logout';
-import PersonIcon from '@mui/icons-material/Person';
-import LoginIcon from '@mui/icons-material/Login';
+import LogoutIcon from "@mui/icons-material/Logout";
+import PersonIcon from "@mui/icons-material/Person";
+import LoginIcon from "@mui/icons-material/Login";
+import { useCookies } from "react-cookie";
+import { User } from "../utils/types";
 
-export default function BurgerMenu() {
+type BugerMenuProps = {
+  user: User | null;
+};
+
+export default function BurgerMenu({ user }: BugerMenuProps) {
+  const [cookies, setCookie, removeCookie] = useCookies(["JwtToken"]);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const router = useRouter();
   const isOpen = Boolean(anchorEl);
-  const { user, error, isLoading } = useUser();
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    router.push("http://localhost:8080/logout");
+    removeCookie("JwtToken");
   };
 
   const overrideMenuItemheight = () => ({
@@ -76,17 +86,31 @@ export default function BurgerMenu() {
           <p className="pl-2">Create Workout</p>
         </MenuItem>
         {user && (
-          <MenuItem onClick={() => router.push("/myworkouts")}>
-            <PersonIcon /><p className="pl-2">My Workouts</p>
+          <MenuItem
+            sx={overrideMenuItemheight()}
+            onClick={() => router.push("/myworkouts")}
+          >
+            <PersonIcon />
+            <p className="pl-2">My Workouts</p>
           </MenuItem>
         )}
         {user ? (
-          <MenuItem onClick={() => router.push("/api/auth/logout")}>
-            <LogoutIcon /><p className="pl-2">Logout</p>
+          <MenuItem
+            sx={overrideMenuItemheight()}
+            onClick={handleLogout}
+          >
+            <LogoutIcon />
+            <p className="pl-2">Logout</p>
           </MenuItem>
         ) : (
-          <MenuItem onClick={() => router.push("/api/auth/login")}>
-            <LoginIcon /><p className="pl-2">Login</p>
+          <MenuItem
+            sx={overrideMenuItemheight()}
+            onClick={() =>
+              router.push("http://localhost:8080/oauth2/authorization/okta")
+            }
+          >
+            <LoginIcon />
+            <p className="pl-2">Login</p>
           </MenuItem>
         )}
       </Menu>

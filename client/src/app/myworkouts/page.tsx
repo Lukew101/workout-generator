@@ -1,18 +1,53 @@
 "use client";
-import { useUser } from "@auth0/nextjs-auth0/client";
+import { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
+import { jwtDecode } from "jwt-decode";
+import { User } from "../utils/types";
 
 export default function ProfileClient() {
-  const { user, error, isLoading } = useUser();
+  const [cookies, setCookie, removeCookie] = useCookies(["JwtToken"]);
+  const [user, setUser] = useState<User>();
+  const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>{error.message}</div>;
+  const fetchUser = async () => {
+    const cookieExpiration = new Date();
+    cookieExpiration.setHours(cookieExpiration.getHours() + 8);
 
-  return (
-    user && (
-      <div>
-        <h2>{user.name}</h2>
-        <p>{user.email}</p>
-      </div>
-    )
+    const res = await fetch(`${BACKEND_URL}/user`, {
+      credentials: "include",
+    });
+
+    const jwtToken = res.headers.get("IdToken");
+
+    setCookie("JwtToken", jwtToken, {
+      path: "/",
+      sameSite: "none",
+      secure: true,
+      expires: cookieExpiration,
+    });
+  };
+
+  useEffect(() => {
+    if (!cookies.JwtToken) {
+      fetchUser();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (cookies.JwtToken && user == null) {
+      const userToken: string = cookies.JwtToken;
+      const user: User = jwtDecode(userToken);
+      setUser(user);
+    }
+  }, [cookies.JwtToken]);
+
+  return user ? (
+    <div>
+      <h2 className="mt-20">{user.name}</h2>
+      <h2>{user.email}</h2>
+      <img src={user.picture} alt={`${user.name} profile picture`} />
+    </div>
+  ) : (
+    <h2>Please sign in</h2>
   );
 }

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Exercise } from "../utils/types";
 
 type ExerciseProps = {
   exercise: Exercise;
