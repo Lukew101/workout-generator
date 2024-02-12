@@ -63,3 +63,10 @@ export type FormData = {
   muscle: string;
   difficulty: string;
 };
+
+export type ExerciseTypeProps = {
+  strengthExercises: StrengthExercise[];
+  cardioExercises: CardioExercise[];
+  plyometricExercises: PlyometricExercise[];
+  stretchingExercises: StretchingExercise[];
+};
