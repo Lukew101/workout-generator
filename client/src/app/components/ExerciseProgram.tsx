@@ -56,56 +56,80 @@ export function ExerciseProgram({
       {strengthExercises.map((exercise, index) => (
         <Accordion key={index}>
           <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-            <Typography>{exercise.name}</Typography>
-            <Typography>{exercise.sets}</Typography>
-            <Typography>{exercise.reps}</Typography>
+            <div className="flex gap-10 mx-2">
+              <Typography sx={{ width: "250px" }}>{exercise.name}</Typography>
+              <Typography>
+                <span>Sets: </span>
+                {exercise.sets}
+              </Typography>
+              <Typography>
+                <span>Reps: </span>
+                {exercise.reps}
+              </Typography>
+            </div>
           </AccordionSummary>
           <AccordionDetails>
-            <Typography>
-                {exercise.instructions}
-            </Typography>
+            <Typography>{exercise.instructions}</Typography>
           </AccordionDetails>
         </Accordion>
       ))}
       {cardioExercises.map((exercise, index) => (
         <Accordion key={index}>
           <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-            <Typography>{exercise.name}</Typography>
-            <Typography>{exercise.sets}</Typography>
-            <Typography>{exercise.duration}</Typography>
+            <div className="flex gap-10 mx-2">
+              <Typography sx={{ width: "250px" }}>{exercise.name}</Typography>
+              <Typography>
+                <span>Sets: </span>
+                {exercise.sets}
+              </Typography>
+              <Typography>
+                <span>Duration: </span>
+                {exercise.duration}
+              </Typography>
+            </div>
           </AccordionSummary>
           <AccordionDetails>
-            <Typography>
-                {exercise.instructions}
-            </Typography>
+            <Typography>{exercise.instructions}</Typography>
           </AccordionDetails>
         </Accordion>
       ))}
       {plyometricExercises.map((exercise, index) => (
         <Accordion key={index}>
           <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-            <Typography>{exercise.name}</Typography>
-            <Typography>{exercise.sets}</Typography>
-            <Typography>{exercise.reps}</Typography>
+            <div className="flex gap-10 mx-2">
+              <Typography sx={{ width: "250px" }}>{exercise.name}</Typography>
+              <Typography>
+                <span>Sets: </span>
+                {exercise.sets}
+              </Typography>
+              <Typography>
+                <span>Reps: </span>
+                {exercise.reps}
+              </Typography>
+            </div>
           </AccordionSummary>
           <AccordionDetails>
-            <Typography>
-                {exercise.instructions}
-            </Typography>
+            <Typography>{exercise.instructions}</Typography>
           </AccordionDetails>
         </Accordion>
       ))}
       {stretchingExercises.map((exercise, index) => (
         <Accordion key={index}>
           <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-            <Typography>{exercise.name}</Typography>
-            <Typography>{exercise.sets}</Typography>
-            <Typography>{exercise.duration}</Typography>
+            <div className="flex gap-10 mx-2">
+              <Typography sx={{ width: "250px" }}>{exercise.name}</Typography>
+              <Typography>
+                <span>Sets: </span>
+                {exercise.sets}
+              </Typography>
+              <Typography>
+                <span>Duration: </span>
+                {exercise.duration}
+              </Typography>
+            </div>
           </AccordionSummary>
           <AccordionDetails>
-            <Typography>
-                {exercise.instructions}
-            </Typography>
+            <Typography>{exercise.instructions}</Typography>
           </AccordionDetails>
         </Accordion>
       ))}
