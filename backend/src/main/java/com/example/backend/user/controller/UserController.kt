@@ -1,5 +1,6 @@
 package com.example.backend.user.controller
 
+import com.example.backend.user.controller.dtos.ProgramListResponse
 import com.example.backend.user.controller.dtos.ProgramRequestDTO
 import com.example.backend.user.controller.dtos.UserResponseData
 import com.example.backend.user.model.Program
@@ -36,6 +37,11 @@ class UserController(
         headers.accessControlExposeHeaders = listOf("IdToken")
 
         return ResponseEntity(userData, headers, HttpStatus.OK)
+    }
+
+    @GetMapping("/program")
+    fun getAllUsersPrograms(@AuthenticationPrincipal jwt: Jwt): ProgramListResponse {
+        return userService.getAllUsersPrograms(jwt)
     }
 
     @PostMapping("/program")
