@@ -25,6 +25,24 @@ export async function fetchExerciseList(
   }
 }
 
+export async function fetchUsersPrograms(token: string) {
+    try {
+        const response = await fetch(`${BACKEND_URL}/user/program`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+        });
+        if (!response.ok) {
+        throw new Error("Failed to fetch programs");
+        }
+        const programs = await response.json();
+        return programs.programs;
+    } catch (error) {
+        console.error("Error while fetching the programs:", error);
+    }
+    
+}
+
 export async function saveProgram(
   name: string,
   strengthExercises: any,
