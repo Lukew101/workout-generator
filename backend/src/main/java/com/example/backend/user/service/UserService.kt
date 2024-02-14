@@ -1,6 +1,7 @@
 package com.example.backend.user.service
 
 import com.example.backend.exceptionHandler.exception.UserNotFoundException
+import com.example.backend.user.controller.dtos.ProgramListResponse
 import com.example.backend.user.controller.dtos.ProgramRequestDTO
 import com.example.backend.user.controller.dtos.UserResponseData
 import com.example.backend.user.model.Program
@@ -25,6 +26,14 @@ class UserService(
             email = workoutCreativeUser.email,
             profilePicture = workoutCreativeUser.profilePicture
         )
+    }
+
+    fun getAllUsersPrograms(jwt: Jwt): ProgramListResponse {
+        val userEmail = jwt.getClaimAsString("email")
+        val user = userRepository.findByEmail(userEmail)
+            ?: throw UserNotFoundException("User not found")
+
+        return ProgramListResponse(user.programs)
     }
 
     fun createProgram(programData: ProgramRequestDTO, jwt: Jwt): Program {
