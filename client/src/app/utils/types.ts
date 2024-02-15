@@ -70,3 +70,17 @@ export type ExerciseTypeProps = {
   plyometricExercises: PlyometricExercise[];
   stretchingExercises: StretchingExercise[];
 };
+
+export type ExerciseProgramResponse = {
+  id: string;
+  name: string;
+  strengthExercises: StrengthExercise[];
+  cardioExercises: CardioExercise[];
+  plyometricExercises: PlyometricExercise[];
+  stretchingExercises: StretchingExercise[];
+};
+
+export type ExerciseProgramsResponse = {
+  programs: ExerciseProgramResponse[];
+};
+
