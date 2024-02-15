@@ -14,6 +14,7 @@ import org.springframework.security.oauth2.core.oidc.user.OidcUser
 import org.springframework.security.oauth2.jwt.Jwt
 
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -42,6 +43,11 @@ class UserController(
     @GetMapping("/program")
     fun getAllUsersPrograms(@AuthenticationPrincipal jwt: Jwt): ProgramListResponse {
         return userService.getAllUsersPrograms(jwt)
+    }
+
+    @GetMapping("/program/{programId}")
+    fun getUserProgramById(@PathVariable programId: String): Program {
+        return userService.getProgramById(programId)
     }
 
     @PostMapping("/program")
