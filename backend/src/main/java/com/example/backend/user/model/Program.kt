@@ -8,7 +8,7 @@ import jakarta.persistence.*
 class Program {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private val id: Long = 0
+    val id: Long = 0
 
     var name: String = ""
 
