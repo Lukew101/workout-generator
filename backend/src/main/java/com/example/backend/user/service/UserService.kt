@@ -9,6 +9,7 @@ import org.springframework.security.access.AccessDeniedException
 import org.springframework.security.oauth2.core.oidc.user.OidcUser
 import org.springframework.security.oauth2.jwt.Jwt
 import org.springframework.stereotype.Service
+import java.util.*
 
 @Service
 class UserService(
@@ -34,6 +35,11 @@ class UserService(
             ?: throw UserNotFoundException("User not found")
 
         return ProgramListResponse(user.programs)
+    }
+
+    fun getProgramById(programId: String): Program {
+        val programOptional: Optional<Program> = programRepository.findById(programId.toLong())
+        return programOptional.orElseThrow { NoSuchElementException("Program not found for id: $programId") }
     }
 
     fun createProgram(programData: ProgramRequestDTO, jwt: Jwt): Program {
