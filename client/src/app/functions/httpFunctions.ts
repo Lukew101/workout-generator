@@ -1,4 +1,4 @@
-import { Exercise, FormData } from "../utils/types";
+import { Exercise, ExerciseProgramResponse, ExerciseProgramsResponse, FormData } from "../utils/types";
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
@@ -25,7 +25,7 @@ export async function fetchExerciseList(
   }
 }
 
-export async function fetchUsersPrograms(token: string) {
+export async function fetchUserProgramList(token: string) {
     try {
         const response = await fetch(`${BACKEND_URL}/user/program`, {
         headers: {
@@ -35,12 +35,28 @@ export async function fetchUsersPrograms(token: string) {
         if (!response.ok) {
         throw new Error("Failed to fetch programs");
         }
-        const programs = await response.json();
+        const programs: ExerciseProgramsResponse = await response.json();
         return programs.programs;
     } catch (error) {
         console.error("Error while fetching the programs:", error);
-    }
-    
+    }  
+}
+
+export async function fetchUserProgram(programId: string, token: string) {
+    try {
+        const response = await fetch(`${BACKEND_URL}/user/program/${programId}`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+        });
+        if (!response.ok) {
+        throw new Error("Failed to fetch programs");
+        }
+        const program: ExerciseProgramResponse = await response.json();
+        return program;
+    } catch (error) {
+        console.error("Error while fetching the programs:", error);
+    }  
 }
 
 export async function saveProgram(
