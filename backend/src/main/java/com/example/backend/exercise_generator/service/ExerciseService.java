@@ -25,29 +25,46 @@ public class ExerciseService {
 
     public List<StrengthExerciseResponseDTO> getStrengthExercises(ExerciseRequestDTO exerciseRequestDTO) throws IOException, InterruptedException {
         List<ExerciseAPIResponseDTO> responseExerciseList = getExerciseList(exerciseRequestDTO);
-        return responseExerciseList.stream()
-                .map(exercise -> new StrengthExerciseResponseDTO(exercise.name(), exercise.type(), exercise.muscle(), exercise.equipment(), exercise.difficulty(), exercise.instructions(), 3, 12))
-                .toList();
+        int sets = responseExerciseList.size() * 3;
+
+        List<StrengthExerciseResponseDTO> strengthExercises = new ArrayList<>();
+
+        int remainingSets = sets;
+        for (ExerciseAPIResponseDTO exercise : responseExerciseList) {
+            int exerciseSets = Math.min(random.nextInt(3) + 2, remainingSets);
+            int exerciseReps = random.nextInt(8) + 8;
+            remainingSets -= exerciseSets;
+            strengthExercises.add(new StrengthExerciseResponseDTO(exercise.name(), exercise.type(), exercise.muscle(),
+                    exercise.equipment(), exercise.difficulty(), exercise.instructions(), exerciseSets, exerciseReps));
+        }
+
+        return strengthExercises;
     }
 
     public List<PlyometricExerciseResponseDTO> getPlyometricExercises(ExerciseRequestDTO exerciseRequestDTO) throws IOException, InterruptedException {
         List<ExerciseAPIResponseDTO> responseExerciseList = getExerciseList(exerciseRequestDTO);
+
         return responseExerciseList.stream()
-                .map(exercise -> new PlyometricExerciseResponseDTO(exercise.name(), exercise.type(), exercise.equipment(), exercise.difficulty(), exercise.instructions(), 3, 12))
+                .map(exercise -> new PlyometricExerciseResponseDTO(exercise.name(), exercise.type(), exercise.equipment(),
+                        exercise.difficulty(), exercise.instructions(), 3, 12))
                 .toList();
     }
 
     public List<StretchingExerciseResponseDTO> getStretchingExercises(ExerciseRequestDTO exerciseRequestDTO) throws IOException, InterruptedException {
         List<ExerciseAPIResponseDTO> responseExerciseList = getExerciseList(exerciseRequestDTO);
+
         return responseExerciseList.stream()
-                .map(exercise -> new StretchingExerciseResponseDTO(exercise.name(), exercise.type(), exercise.muscle(), exercise.equipment(), exercise.difficulty(), exercise.instructions(), 3, 30))
+                .map(exercise -> new StretchingExerciseResponseDTO(exercise.name(), exercise.type(), exercise.muscle(), exercise.equipment(),
+                        exercise.difficulty(), exercise.instructions(), 3, 30))
                 .toList();
     }
 
     public List<CardioExerciseResponseDTO> getCardioExercises(ExerciseRequestDTO exerciseRequestDTO) throws IOException, InterruptedException {
         List<ExerciseAPIResponseDTO> responseExerciseList = getExerciseList(exerciseRequestDTO);
+
         return responseExerciseList.stream()
-                .map(exercise -> new CardioExerciseResponseDTO(exercise.name(), exercise.type(), exercise.equipment(), exercise.difficulty(), exercise.instructions(), 1, 15))
+                .map(exercise -> new CardioExerciseResponseDTO(exercise.name(), exercise.type(), exercise.equipment(),
+                        exercise.difficulty(), exercise.instructions(), 1, 15))
                 .toList();
     }
 
