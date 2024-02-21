@@ -43,11 +43,20 @@ public class ExerciseService {
 
     public List<PlyometricExerciseResponseDTO> getPlyometricExercises(ExerciseRequestDTO exerciseRequestDTO) throws IOException, InterruptedException {
         List<ExerciseAPIResponseDTO> responseExerciseList = getExerciseList(exerciseRequestDTO);
+        int sets = responseExerciseList.size() * 3;
 
-        return responseExerciseList.stream()
-                .map(exercise -> new PlyometricExerciseResponseDTO(exercise.name(), exercise.type(), exercise.equipment(),
-                        exercise.difficulty(), exercise.instructions(), 3, 12))
-                .toList();
+        List<PlyometricExerciseResponseDTO> plyometricExercises = new ArrayList<>();
+
+        int remainingSets = sets;
+        for (ExerciseAPIResponseDTO exercise : responseExerciseList) {
+            int exerciseSets = Math.min(random.nextInt(3) + 2, remainingSets);
+            int exerciseReps = random.nextInt(8) + 8;
+            remainingSets -= exerciseSets;
+            plyometricExercises.add(new PlyometricExerciseResponseDTO(exercise.name(), exercise.type(),
+                    exercise.equipment(), exercise.difficulty(), exercise.instructions(), exerciseSets, exerciseReps));
+        }
+
+        return plyometricExercises;
     }
 
     public List<StretchingExerciseResponseDTO> getStretchingExercises(ExerciseRequestDTO exerciseRequestDTO) throws IOException, InterruptedException {
